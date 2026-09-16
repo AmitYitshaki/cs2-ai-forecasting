@@ -1,0 +1,35 @@
+{
+  "schema_version": "2.0",
+  "source": {
+    "path": "data/final_tournament_features.csv",
+    "sha256": "6a40364e94599578f2bbcf518b8ae6176aeac8670593704c7043459e1e687387"
+  },
+  "filter": {
+    "rule": "map_name.notna() AND (is_total == False OR bestOf == 1)",
+    "score_sanity_rule": "score1_game + score2_game > 0",
+    "raw_rows": 11151,
+    "valid_rows": 6700
+  },
+  "split_boundaries": {
+    "train": "datetime < 2026-01-01",
+    "validation": "2026-01-01 <= datetime < 2026-04-01",
+    "test": "datetime >= 2026-04-01"
+  },
+  "ordering": [
+    "filter invalid and phantom rows",
+    "build point-in-time features chronologically",
+    "chronological split",
+    "independent symmetrization within each split"
+  ],
+  "rows_before_symmetrization": {
+    "train": 5472,
+    "validation": 633,
+    "test": 595
+  },
+  "rows_after_symmetrization": {
+    "train": 10944,
+    "validation": 1266,
+    "test": 1190
+  },
+  "storage_note": "Legacy V1 train/val/test Parquet files were intentionally removed during the V2 reset. Current notebooks rebuild leakage-safe point-in-time splits in memory from the hashed source table."
+}

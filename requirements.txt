@@ -1,0 +1,12 @@
+pandas==3.0.5
+numpy==2.5.3
+scikit-learn==1.9.1
+xgboost==3.4.1
+jupyter==1.1.1
+matplotlib==3.11.2
+seaborn==0.13.2
+rapidfuzz==3.14.6
+optuna==5.0.0
+pyarrow==25.0.1
+joblib==1.6.0
+tqdm==4.70.1

@@ -1,0 +1,53 @@
+{
+  "schema_version": "1.0",
+  "tournament_name": "starladder",
+  "timestamp_utc": "2026-09-15T12:01:01Z",
+  "seed": 42,
+  "n_iterations": 100000,
+  "execution_seconds": 122.10582729999442,
+  "model_artifact_path": "artifacts/map_classifier/canonical_elo_isotonic.joblib",
+  "model_artifact_sha256": "274a8118ada2c9551f7e668f8999fa0ff672b0158b6d055056a152f09820370d",
+  "k_factor": 24.0,
+  "active_map_pool": [
+    "Cache",
+    "Dust2",
+    "Mirage",
+    "Inferno",
+    "Nuke",
+    "Ancient",
+    "Anubis"
+  ],
+  "quarterfinals": [
+    [
+      "mouz",
+      "nrg"
+    ],
+    [
+      "vitality",
+      "magic"
+    ],
+    [
+      "natus vincere",
+      "aurora"
+    ],
+    [
+      "furia",
+      "mibr"
+    ]
+  ],
+  "historical_map_orders_used": {},
+  "extra_metadata": {
+    "format": "eight_team_double_elimination",
+    "grand_final_best_of": 5,
+    "other_matches_best_of": 3,
+    "grand_final_reset": false,
+    "elo_snapshot_cutoff": "2026-09-17T00:00:00",
+    "stage_semantics": {
+      "QF": "entered tournament",
+      "SF": "survived to final four after lower semi-finals",
+      "Final": "reached Grand Final"
+    },
+    "paired_stability_seed": 99,
+    "max_champion_probability_difference": 0.0032999999999999974
+  }
+}
