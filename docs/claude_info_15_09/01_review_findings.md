@@ -1,6 +1,6 @@
 # Red Team Review Findings — 2026-09-15
 
-Scope: `notebooks/05_test_set_evaluation.ipynb`, `notebooks/06_cologne_backtest.ipynb`, `src/models/simulator.py`, `src/models/bracket_simulator.py`. Reviewed by reading source directly (code + notebook cells), not by re-running.
+Scope: `notebooks/1.5_locked_test_artifact_evaluation.ipynb`, `notebooks/1.6_monte_carlo_fast_path_and_cologne.ipynb`, `src/models/simulator.py`, `src/models/bracket_simulator.py`. Reviewed by reading source directly (code + notebook cells), not by re-running.
 
 Severity scale: **Blocker** (must fix before the next live run) / **High** (fix soon, real risk) / **Medium** (latent risk, fix opportunistically) / **Info** (confirmed clean, no action).
 
@@ -10,8 +10,8 @@ Severity scale: **Blocker** (must fix before the next live run) / **High** (fix 
 
 **What's wrong:** the model that produced the officially locked Test number is not the model that will make live predictions.
 
-- `notebooks/05_test_set_evaluation.ipynb` (cell 7) trains `final_model` on **`X_train_val`** (Train+Val concatenated) and evaluates **raw, uncalibrated** `predict_proba` directly against Test (cell 9). No `CalibratedClassifierCV` / isotonic step appears anywhere in this notebook.
-- `notebooks/06_cologne_backtest.ipynb` (cell 8) trains `canonical_model` on **Train only**, then fits isotonic calibration (`CalibratedClassifierCV(..., method='isotonic')`) on **Val only**. This calibrated artifact (`artifacts/map_classifier/canonical_elo_isotonic.joblib`) is what `SeriesSimulator` and `bracket_simulator.simulate_tournament` actually consume.
+- `notebooks/1.5_locked_test_artifact_evaluation.ipynb` originally trained `final_model` on **`X_train_val`** (Train+Val concatenated) and evaluated **raw, uncalibrated** `predict_proba` directly against Test. This finding was subsequently fixed in that notebook by loading the deployed calibrated artifact.
+- `notebooks/1.6_monte_carlo_fast_path_and_cologne.ipynb` trains `canonical_model` on **Train only**, then fits isotonic calibration (`CalibratedClassifierCV(..., method='isotonic')`) on **Val only**. This calibrated artifact (`artifacts/map_classifier/canonical_elo_isotonic.joblib`) is what `SeriesSimulator` and `bracket_simulator.simulate_tournament` consume.
 
 **Consequence:** the "64.6% Map1 accuracy, official and locked" figure describes a model that will never be used to predict a real match. The model that *will* be used live has never had its Test-set performance directly measured — nb06 only reports Val log-loss/Brier before/after calibration.
 
@@ -63,7 +63,7 @@ This should be resolved as a single, transparent, documented action (old number 
 
 ## Confirmed clean (no action needed)
 
-- **No new data leakage found in the simulation layer.** Both snapshot-construction cells in `06_cologne_backtest.ipynb` (the standalone series backtest, cell 12; the full-bracket backtest, cell 20) correctly filter history with a strict `<` cutoff on the event's own start timestamp before building the Elo snapshot — no simulated match can see its own or a later result.
+- **No new data leakage found in the simulation layer.** Both snapshot-construction sections in `1.6_monte_carlo_fast_path_and_cologne.ipynb` correctly filter history with a strict `<` cutoff on the event's own start timestamp before building the Elo snapshot — no simulated match can see its own or a later result.
 - **Calibration in nb06 is correctly fit on Validation only**, never Test.
 - **The bootstrap CI in nb05** (cell 9) correctly resamples by `match_id`, not by row — properly respecting both the symmetrization duplication and multi-map series correlation. Good statistical practice, not a shortcut.
 - **Diff-feature sign-flip assertions** are present and correctly wired in both notebooks' symmetrization functions.

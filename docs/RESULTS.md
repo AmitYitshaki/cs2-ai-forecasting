@@ -10,7 +10,7 @@
 
 ## מדד Test הנעול
 
-Notebook 05 טוען את `canonical_elo_isotonic.joblib` עצמו ומעריך את אותו מודל שמשרת את הסימולטור.
+Notebook 1.5 טוען את `canonical_elo_isotonic.joblib` עצמו ומעריך את אותו מודל שמשרת את הסימולטור.
 
 | שכבה | מספר שורות מסומטרות | דיוק | Brier |
 |---|---:|---:|---:|

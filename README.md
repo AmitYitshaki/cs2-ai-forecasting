@@ -31,7 +31,7 @@ The deployed artifact is `artifacts/map_classifier/canonical_elo_isotonic.joblib
 
 ## Locked Test result
 
-Notebook 05 evaluates the exact calibrated artifact used by the simulator—not a separately retrained approximation.
+Notebook 1.5 evaluates the exact calibrated artifact used by the simulator—not a separately retrained approximation.
 
 | Metric | Overall Test | Map 1 | Map 2+ |
 |---|---:|---:|---:|
@@ -59,15 +59,15 @@ All checks cleared the 0.5 percentage-point guardrail. Full-precision results an
 
 | Notebook | Purpose |
 |---|---|
-| `00_setup.ipynb` | Environment verification, source-table sanity check, and the first anti-leakage allowlist |
-| `01_v2_elo_pipeline.ipynb` | Point-in-time global/map Elo and the first Elo-only XGBoost ablation |
-| `02_v2_final_model.ipynb` | Rejected Elo + H2H + DNA candidate and why more features were not automatically better |
-| `03_v2_canonical_elo_diagnostics.ipynb` | Canonical identity fix and controlled DNA, H2H, and rolling-form ablations |
-| `04_v2_optuna_final.ipynb` | Optuna tuning and paired bootstrap guardrail against the fixed baseline |
-| `05_test_set_evaluation.ipynb` | One-way locked Test evaluation of the deployed calibrated artifact |
-| `06_cologne_backtest.ipynb` | Series simulation and point-in-time Cologne playoff backtest |
-| `07_starladder_operation.ipynb` | 100k-path double-elimination pre-production run and atomic export |
-| `08_starladder_1m_production.ipynb` | Dual-seed million-path production run and rare-event analytics |
+| `1.0_setup_and_data_sanity.ipynb` | Environment verification, source-table sanity check, and the first anti-leakage allowlist |
+| `1.1_point_in_time_elo_pipeline.ipynb` | Point-in-time global/map Elo and the first Elo-only XGBoost ablation |
+| `1.2_xgboost_elo_h2h_dna_candidate.ipynb` | Rejected Elo + H2H + DNA candidate and why more features were not automatically better |
+| `1.3_canonical_elo_feature_ablation.ipynb` | Canonical identity fix and controlled DNA, H2H, and rolling-form ablations |
+| `1.4_optuna_statistical_guardrail.ipynb` | Optuna tuning and paired bootstrap guardrail against the fixed baseline |
+| `1.5_locked_test_artifact_evaluation.ipynb` | One-way locked Test evaluation of the deployed calibrated artifact |
+| `1.6_monte_carlo_fast_path_and_cologne.ipynb` | Fast NumPy inference, series simulation, and point-in-time Cologne playoff backtest |
+| `1.7_double_elimination_preproduction.ipynb` | 100k-path double-elimination pre-production run and atomic export |
+| `1.8_starladder_1m_production.ipynb` | Dual-seed million-path production run and rare-event analytics |
 
 All notebook Markdown is written in Hebrew. The notebooks are executed and retain their outputs so the reasoning and observed results can be reviewed without rerunning long simulations.
 
@@ -104,7 +104,7 @@ To inspect the educational workflow:
 jupyter lab
 ```
 
-The million-iteration production run is intentionally expensive. For a smoke test, call the simulator with a much smaller `n_iterations` value rather than rerunning Notebook 08 unchanged.
+The million-iteration production run is intentionally expensive. For a smoke test, call the simulator with a much smaller `n_iterations` value rather than rerunning Notebook 1.8 unchanged.
 
 ## Reproducibility and safety
 

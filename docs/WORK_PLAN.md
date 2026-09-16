@@ -13,11 +13,11 @@
 ### Playbook Stage 1: Setup & Git
 
 - [x] **1. הקמת סביבת הפיתוח**
-  פתיחת הפרויקט ב-VS Code, `git init` (אם עוד לא), יצירת virtual environment, התקנת `pandas` `numpy` `scikit-learn` `xgboost` `jupyter` `matplotlib` `seaborn` `rapidfuzz`. יצירת מבנה תיקיות: `src/`, `notebooks/`, `data/` (או קישור ל-`Raw Data bases/`). פתיחת מחברת Jupyter ראשונה: `notebooks/00_setup.ipynb`.
+  פתיחת הפרויקט ב-VS Code, `git init` (אם עוד לא), יצירת virtual environment, התקנת `pandas` `numpy` `scikit-learn` `xgboost` `jupyter` `matplotlib` `seaborn` `rapidfuzz`. יצירת מבנה תיקיות: `src/`, `notebooks/`, `data/` (או קישור ל-`Raw Data bases/`). פתיחת מחברת Jupyter ראשונה: `notebooks/1.0_setup_and_data_sanity.ipynb`.
   **מייצר:** סביבה שכל שלב הבא רץ בתוכה.
 
 - [x] **2. אימות טעינת דאטה (Sanity Check)**
-  בתוך `00_setup.ipynb`: טעינת כל 15 קבצי המקור + `team_dna_features.csv` + `final_tournament_features.csv`, ווידוא shapes/dtypes תואמים למה שמתועד ב-`PROJECT_BRIEF.md`. אם ה-shape לא תואם — לעצור ולברר לפני שממשיכים.
+  בתוך `1.0_setup_and_data_sanity.ipynb`: טעינת טבלת המקור והטבלאות הנגזרות, ווידוא shapes/dtypes תואמים למה שמתועד ב-`PROJECT_BRIEF.md`. אם ה-shape לא תואם — לעצור ולברר לפני שממשיכים.
   **מייצר:** ודאות שעובדים על הגרסה הנכונה של הדאטה לפני שבונים עליה.
 
 ---
