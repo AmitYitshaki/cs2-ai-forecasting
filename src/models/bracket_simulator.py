@@ -26,6 +26,23 @@ N_ELO_FEATURES_EXPECTED_ORDER = (
     "elo_map_diff",
 )
 N_ELO_FEATURES = len(N_ELO_FEATURES_EXPECTED_ORDER)
+COMPLETE_PATH_STAGES = (
+    "upper_qf1_winner",
+    "upper_qf2_winner",
+    "upper_qf3_winner",
+    "upper_qf4_winner",
+    "upper_sf1_winner",
+    "upper_sf2_winner",
+    "upper_final_winner",
+    "lower_r1a_winner",
+    "lower_r1b_winner",
+    "lower_sf_a_winner",
+    "lower_sf_b_winner",
+    "lower_r3_winner",
+    "lower_final_winner",
+    "grand_final_winner",
+    "grand_final_runner_up",
+)
 TEAM_DISPLAY_NAMES: dict[Hashable, str] = {
     "aurora": "Aurora",
     "betboom team": "BETBOOM",
@@ -170,6 +187,9 @@ class TournamentAnalytics:
         default_factory=Counter
     )
     grand_final_appearances: Counter[Hashable] = field(default_factory=Counter)
+    complete_paths: Counter[tuple[Hashable, ...]] = field(
+        default_factory=Counter
+    )
 
     def merge(self, other: "TournamentAnalytics") -> None:
         """Merge one independently simulated batch into this tracker."""
@@ -178,6 +198,7 @@ class TournamentAnalytics:
         self.runner_ups.update(other.runner_ups)
         self.exact_podiums.update(other.exact_podiums)
         self.grand_final_appearances.update(other.grand_final_appearances)
+        self.complete_paths.update(other.complete_paths)
 
     def cinderella_runs(
         self,
@@ -571,6 +592,24 @@ def _simulate_double_elimination_batch(
     )
     analytics.grand_final_appearances.update(upper_final_winner.tolist())
     analytics.grand_final_appearances.update(consolidation_winner.tolist())
+    analytics.complete_paths.update(zip(
+        upper_qf_winners[0],
+        upper_qf_winners[1],
+        upper_qf_winners[2],
+        upper_qf_winners[3],
+        upper_sf_winners[0],
+        upper_sf_winners[1],
+        upper_final_winner,
+        lower_r1_winners[0],
+        lower_r1_winners[1],
+        lower_sf_winners[0],
+        lower_sf_winners[1],
+        lower_final_winner,
+        consolidation_winner,
+        champions,
+        runner_ups,
+        strict=True,
+    ))
     _increment_counts(counts, champions, "Champion")
     return counts, analytics
 
@@ -967,6 +1006,11 @@ def _assert_tournament_analytics(
     assert sum(analytics.runner_ups.values()) == n_iterations
     assert sum(analytics.exact_podiums.values()) == n_iterations
     assert sum(analytics.grand_final_appearances.values()) == 2 * n_iterations
+    assert sum(analytics.complete_paths.values()) == n_iterations
+    assert all(
+        len(path) == len(COMPLETE_PATH_STAGES)
+        for path in analytics.complete_paths
+    )
     for team, team_counts in counts.items():
         assert analytics.grand_final_appearances[team] == team_counts["Final"], (
             f"Grand Final appearances do not reconcile for {team}."

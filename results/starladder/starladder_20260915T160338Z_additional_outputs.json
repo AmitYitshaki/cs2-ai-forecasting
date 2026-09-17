@@ -1,0 +1,256 @@
+{
+  "schema_version": "1.0",
+  "tournament_name": "starladder",
+  "generated_timestamp_utc": "2026-09-16T11:27:54Z",
+  "source_runs": [
+    {
+      "seed": 42,
+      "n_iterations": 1000000,
+      "metadata_path": "results/starladder/starladder_20260915T160338Z_seed42_n1000000_metadata.json"
+    },
+    {
+      "seed": 99,
+      "n_iterations": 1000000,
+      "metadata_path": "results/starladder/starladder_20260915T160338Z_seed99_n1000000_metadata.json"
+    }
+  ],
+  "deterministic_replay_runs": [
+    {
+      "seed": 42,
+      "n_iterations": 1000000,
+      "metadata_path": "results/starladder/starladder_20260916T112636Z_seed42_n1000000_metadata.json"
+    },
+    {
+      "seed": 99,
+      "n_iterations": 1000000,
+      "metadata_path": "results/starladder/starladder_20260916T112636Z_seed99_n1000000_metadata.json"
+    }
+  ],
+  "model_artifact_path": "artifacts/map_classifier/canonical_elo_isotonic.joblib",
+  "model_artifact_sha256": "274a8118ada2c9551f7e668f8999fa0ff672b0158b6d055056a152f09820370d",
+  "elo_snapshot_cutoff": "2026-09-17T00:00:00",
+  "last_historical_map": "2026-06-21T18:00:00",
+  "k_factor": 24.0,
+  "active_map_pool": [
+    "Cache",
+    "Dust2",
+    "Mirage",
+    "Inferno",
+    "Nuke",
+    "Ancient",
+    "Anubis"
+  ],
+  "opening_series_probabilities": {
+    "status": "computed_from_locked_model_and_snapshot",
+    "method": "exact enumeration of all 210 ordered three-map samples, including live Elo updates after each map",
+    "historical_vetoes_used": false,
+    "results": [
+      {
+        "matchup": "MOUZ vs NRG",
+        "best_of": 3,
+        "team_a": "MOUZ",
+        "team_b": "NRG",
+        "team_a_win_probability": 0.8799770585395214,
+        "team_b_win_probability": 0.12002294146047865
+      },
+      {
+        "matchup": "Natus Vincere vs Aurora",
+        "best_of": 3,
+        "team_a": "Natus Vincere",
+        "team_b": "Aurora",
+        "team_a_win_probability": 0.6027640666983091,
+        "team_b_win_probability": 0.39723593330169094
+      },
+      {
+        "matchup": "Vitality vs magic",
+        "best_of": 3,
+        "team_a": "Vitality",
+        "team_b": "magic",
+        "team_a_win_probability": 0.8431769479868169,
+        "team_b_win_probability": 0.15682305201318314
+      },
+      {
+        "matchup": "FURIA vs MIBR",
+        "best_of": 3,
+        "team_a": "FURIA",
+        "team_b": "MIBR",
+        "team_a_win_probability": 0.7840157510417156,
+        "team_b_win_probability": 0.21598424895828439
+      }
+    ]
+  },
+  "complete_bracket_outcomes": {
+    "status": "recovered_by_deterministic_replay",
+    "requested_top_k": 3,
+    "rerun_performed": true,
+    "replay_validation": "All previously published aggregate analytics match the locked source artifacts exactly for both seeds.",
+    "path_schema": [
+      "upper_qf1_winner",
+      "upper_qf2_winner",
+      "upper_qf3_winner",
+      "upper_qf4_winner",
+      "upper_sf1_winner",
+      "upper_sf2_winner",
+      "upper_final_winner",
+      "lower_r1a_winner",
+      "lower_r1b_winner",
+      "lower_sf_a_winner",
+      "lower_sf_b_winner",
+      "lower_r3_winner",
+      "lower_final_winner",
+      "grand_final_winner",
+      "grand_final_runner_up"
+    ],
+    "seed_runs": [
+      {
+        "seed": 42,
+        "n_iterations": 1000000,
+        "metadata_path": "results/starladder/starladder_20260916T112636Z_seed42_n1000000_metadata.json",
+        "unique_complete_paths": 12493,
+        "top_3": [
+          {
+            "rank": 1,
+            "count": 4309,
+            "probability": 0.004309,
+            "path": {
+              "upper_qf1_winner": "mouz",
+              "upper_qf2_winner": "vitality",
+              "upper_qf3_winner": "natus vincere",
+              "upper_qf4_winner": "furia",
+              "upper_sf1_winner": "vitality",
+              "upper_sf2_winner": "natus vincere",
+              "upper_final_winner": "vitality",
+              "lower_r1a_winner": "magic",
+              "lower_r1b_winner": "aurora",
+              "lower_sf_a_winner": "furia",
+              "lower_sf_b_winner": "aurora",
+              "lower_r3_winner": "furia",
+              "lower_final_winner": "natus vincere",
+              "grand_final_winner": "vitality",
+              "grand_final_runner_up": "natus vincere"
+            }
+          },
+          {
+            "rank": 2,
+            "count": 3784,
+            "probability": 0.003784,
+            "path": {
+              "upper_qf1_winner": "mouz",
+              "upper_qf2_winner": "vitality",
+              "upper_qf3_winner": "natus vincere",
+              "upper_qf4_winner": "furia",
+              "upper_sf1_winner": "vitality",
+              "upper_sf2_winner": "furia",
+              "upper_final_winner": "vitality",
+              "lower_r1a_winner": "magic",
+              "lower_r1b_winner": "aurora",
+              "lower_sf_a_winner": "natus vincere",
+              "lower_sf_b_winner": "aurora",
+              "lower_r3_winner": "natus vincere",
+              "lower_final_winner": "natus vincere",
+              "grand_final_winner": "vitality",
+              "grand_final_runner_up": "natus vincere"
+            }
+          },
+          {
+            "rank": 3,
+            "count": 3654,
+            "probability": 0.003654,
+            "path": {
+              "upper_qf1_winner": "mouz",
+              "upper_qf2_winner": "vitality",
+              "upper_qf3_winner": "natus vincere",
+              "upper_qf4_winner": "furia",
+              "upper_sf1_winner": "vitality",
+              "upper_sf2_winner": "natus vincere",
+              "upper_final_winner": "vitality",
+              "lower_r1a_winner": "magic",
+              "lower_r1b_winner": "aurora",
+              "lower_sf_a_winner": "furia",
+              "lower_sf_b_winner": "aurora",
+              "lower_r3_winner": "aurora",
+              "lower_final_winner": "natus vincere",
+              "grand_final_winner": "vitality",
+              "grand_final_runner_up": "natus vincere"
+            }
+          }
+        ]
+      },
+      {
+        "seed": 99,
+        "n_iterations": 1000000,
+        "metadata_path": "results/starladder/starladder_20260916T112636Z_seed99_n1000000_metadata.json",
+        "unique_complete_paths": 12423,
+        "top_3": [
+          {
+            "rank": 1,
+            "count": 4506,
+            "probability": 0.004506,
+            "path": {
+              "upper_qf1_winner": "mouz",
+              "upper_qf2_winner": "vitality",
+              "upper_qf3_winner": "natus vincere",
+              "upper_qf4_winner": "furia",
+              "upper_sf1_winner": "vitality",
+              "upper_sf2_winner": "natus vincere",
+              "upper_final_winner": "vitality",
+              "lower_r1a_winner": "magic",
+              "lower_r1b_winner": "aurora",
+              "lower_sf_a_winner": "furia",
+              "lower_sf_b_winner": "aurora",
+              "lower_r3_winner": "furia",
+              "lower_final_winner": "natus vincere",
+              "grand_final_winner": "vitality",
+              "grand_final_runner_up": "natus vincere"
+            }
+          },
+          {
+            "rank": 2,
+            "count": 3798,
+            "probability": 0.003798,
+            "path": {
+              "upper_qf1_winner": "mouz",
+              "upper_qf2_winner": "vitality",
+              "upper_qf3_winner": "natus vincere",
+              "upper_qf4_winner": "furia",
+              "upper_sf1_winner": "vitality",
+              "upper_sf2_winner": "furia",
+              "upper_final_winner": "vitality",
+              "lower_r1a_winner": "magic",
+              "lower_r1b_winner": "aurora",
+              "lower_sf_a_winner": "natus vincere",
+              "lower_sf_b_winner": "aurora",
+              "lower_r3_winner": "natus vincere",
+              "lower_final_winner": "natus vincere",
+              "grand_final_winner": "vitality",
+              "grand_final_runner_up": "natus vincere"
+            }
+          },
+          {
+            "rank": 3,
+            "count": 3607,
+            "probability": 0.003607,
+            "path": {
+              "upper_qf1_winner": "mouz",
+              "upper_qf2_winner": "vitality",
+              "upper_qf3_winner": "natus vincere",
+              "upper_qf4_winner": "furia",
+              "upper_sf1_winner": "vitality",
+              "upper_sf2_winner": "natus vincere",
+              "upper_final_winner": "vitality",
+              "lower_r1a_winner": "magic",
+              "lower_r1b_winner": "aurora",
+              "lower_sf_a_winner": "furia",
+              "lower_sf_b_winner": "aurora",
+              "lower_r3_winner": "aurora",
+              "lower_final_winner": "natus vincere",
+              "grand_final_winner": "vitality",
+              "grand_final_runner_up": "natus vincere"
+            }
+          }
+        ]
+      }
+    ],
+    "seed_stability_max_absolute_difference": 0.000197
+  }
+}

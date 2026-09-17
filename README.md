@@ -2,7 +2,7 @@
 
 A leakage-safe forecasting system for professional Counter-Strike 2 tournaments. The project combines a calibrated XGBoost map classifier with point-in-time Elo ratings and Monte Carlo simulation for Bo3/Bo5 series, single-elimination brackets, and eight-team double-elimination brackets.
 
-The repository is intentionally educational: Python identifiers remain conventional English, while every notebook explains the statistical reasoning and engineering decisions in Hebrew.
+The repository is intentionally educational: Python identifiers remain conventional English, while every notebook explains the statistical reasoning and engineering decisions in paired English and Hebrew Markdown cells. English appears first for international readers, and the original Hebrew documentation is preserved.
 
 ## What the system does
 
@@ -51,9 +51,10 @@ The final production run simulated StarLadder StarSeries Fall 2026 twice with **
 | Grand Final matchup | 0.0425% |
 | Runner-up | 0.0695% |
 | Exact podium | 0.0447% |
+| Complete bracket path | 0.0197% |
 | Cinderella Grand Final run | 0.0410% |
 
-All checks cleared the 0.5 percentage-point guardrail. Full-precision results and complete advanced-analytics distributions are stored under `results/starladder/`; see [docs/RESULTS.md](docs/RESULTS.md) for the concise report.
+All checks cleared the 0.5 percentage-point guardrail. Full-precision results, opening-series probabilities, and the most frequent complete bracket paths are stored under `results/starladder/`; see [docs/RESULTS.md](docs/RESULTS.md) for the concise report.
 
 ## Notebook walkthrough
 
@@ -69,7 +70,7 @@ All checks cleared the 0.5 percentage-point guardrail. Full-precision results an
 | `1.7_double_elimination_preproduction.ipynb` | 100k-path double-elimination pre-production run and atomic export |
 | `1.8_starladder_1m_production.ipynb` | Dual-seed million-path production run and rare-event analytics |
 
-All notebook Markdown is written in Hebrew. The notebooks are executed and retain their outputs so the reasoning and observed results can be reviewed without rerunning long simulations.
+Every Hebrew explanation is preceded by an English companion cell. The notebooks are executed and retain their outputs so the reasoning and observed results can be reviewed without rerunning long simulations.
 
 ## Repository structure
 

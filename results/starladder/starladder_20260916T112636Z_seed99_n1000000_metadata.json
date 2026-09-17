@@ -1,0 +1,1742 @@
+{
+  "schema_version": "1.0",
+  "tournament_name": "starladder",
+  "timestamp_utc": "2026-09-16T11:26:36Z",
+  "seed": 99,
+  "n_iterations": 1000000,
+  "execution_seconds": 1020.2614772000015,
+  "model_artifact_path": "artifacts/map_classifier/canonical_elo_isotonic.joblib",
+  "model_artifact_sha256": "274a8118ada2c9551f7e668f8999fa0ff672b0158b6d055056a152f09820370d",
+  "k_factor": 24.0,
+  "active_map_pool": [
+    "Cache",
+    "Dust2",
+    "Mirage",
+    "Inferno",
+    "Nuke",
+    "Ancient",
+    "Anubis"
+  ],
+  "quarterfinals": [
+    [
+      "mouz",
+      "nrg"
+    ],
+    [
+      "vitality",
+      "magic"
+    ],
+    [
+      "natus vincere",
+      "aurora"
+    ],
+    [
+      "furia",
+      "mibr"
+    ]
+  ],
+  "historical_map_orders_used": {},
+  "extra_metadata": {
+    "format": "eight_team_double_elimination",
+    "grand_final_best_of": 5,
+    "other_matches_best_of": 3,
+    "grand_final_reset": false,
+    "elo_snapshot_cutoff": "2026-09-17T00:00:00",
+    "last_historical_map": "2026-06-21T18:00:00",
+    "preflight_iterations": 5000,
+    "seed_stability_max_absolute_differences": {
+      "P(Champion)": 0.001275,
+      "Grand Final Matchup": 0.000425,
+      "Runner-Up": 0.000695,
+      "Exact Podium": 0.000447,
+      "Complete Bracket Path": 0.000197,
+      "Cinderella Grand Final": 0.00041
+    },
+    "advanced_analytics": {
+      "grand_final_matchups": [
+        {
+          "key": "natus vincere__vs__vitality",
+          "count": 250332,
+          "probability": 0.250332
+        },
+        {
+          "key": "furia__vs__vitality",
+          "count": 192867,
+          "probability": 0.192867
+        },
+        {
+          "key": "aurora__vs__vitality",
+          "count": 127022,
+          "probability": 0.127022
+        },
+        {
+          "key": "mouz__vs__vitality",
+          "count": 75616,
+          "probability": 0.075616
+        },
+        {
+          "key": "mouz__vs__natus vincere",
+          "count": 66764,
+          "probability": 0.066764
+        },
+        {
+          "key": "furia__vs__natus vincere",
+          "count": 57988,
+          "probability": 0.057988
+        },
+        {
+          "key": "furia__vs__mouz",
+          "count": 51846,
+          "probability": 0.051846
+        },
+        {
+          "key": "aurora__vs__mouz",
+          "count": 33216,
+          "probability": 0.033216
+        },
+        {
+          "key": "aurora__vs__natus vincere",
+          "count": 28690,
+          "probability": 0.02869
+        },
+        {
+          "key": "aurora__vs__furia",
+          "count": 28203,
+          "probability": 0.028203
+        },
+        {
+          "key": "mibr__vs__vitality",
+          "count": 16586,
+          "probability": 0.016586
+        },
+        {
+          "key": "magic__vs__vitality",
+          "count": 16094,
+          "probability": 0.016094
+        },
+        {
+          "key": "magic__vs__natus vincere",
+          "count": 14979,
+          "probability": 0.014979
+        },
+        {
+          "key": "furia__vs__magic",
+          "count": 11325,
+          "probability": 0.011325
+        },
+        {
+          "key": "aurora__vs__magic",
+          "count": 7498,
+          "probability": 0.007498
+        },
+        {
+          "key": "mibr__vs__mouz",
+          "count": 4691,
+          "probability": 0.004691
+        },
+        {
+          "key": "mibr__vs__natus vincere",
+          "count": 3911,
+          "probability": 0.003911
+        },
+        {
+          "key": "magic__vs__mouz",
+          "count": 3885,
+          "probability": 0.003885
+        },
+        {
+          "key": "aurora__vs__mibr",
+          "count": 1944,
+          "probability": 0.001944
+        },
+        {
+          "key": "furia__vs__mibr",
+          "count": 1531,
+          "probability": 0.001531
+        },
+        {
+          "key": "natus vincere__vs__nrg",
+          "count": 1210,
+          "probability": 0.00121
+        },
+        {
+          "key": "magic__vs__mibr",
+          "count": 1045,
+          "probability": 0.001045
+        },
+        {
+          "key": "furia__vs__nrg",
+          "count": 978,
+          "probability": 0.000978
+        },
+        {
+          "key": "nrg__vs__vitality",
+          "count": 881,
+          "probability": 0.000881
+        },
+        {
+          "key": "aurora__vs__nrg",
+          "count": 653,
+          "probability": 0.000653
+        },
+        {
+          "key": "mibr__vs__nrg",
+          "count": 110,
+          "probability": 0.00011
+        },
+        {
+          "key": "mouz__vs__nrg",
+          "count": 87,
+          "probability": 8.7e-05
+        },
+        {
+          "key": "magic__vs__nrg",
+          "count": 48,
+          "probability": 4.8e-05
+        }
+      ],
+      "runner_ups": [
+        {
+          "key": "vitality",
+          "count": 235626,
+          "probability": 0.235626
+        },
+        {
+          "key": "natus vincere",
+          "count": 218010,
+          "probability": 0.21801
+        },
+        {
+          "key": "furia",
+          "count": 196762,
+          "probability": 0.196762
+        },
+        {
+          "key": "mouz",
+          "count": 147358,
+          "probability": 0.147358
+        },
+        {
+          "key": "aurora",
+          "count": 133570,
+          "probability": 0.13357
+        },
+        {
+          "key": "magic",
+          "count": 41443,
+          "probability": 0.041443
+        },
+        {
+          "key": "mibr",
+          "count": 23626,
+          "probability": 0.023626
+        },
+        {
+          "key": "nrg",
+          "count": 3605,
+          "probability": 0.003605
+        }
+      ],
+      "exact_podiums": [
+        {
+          "key": "vitality__then__natus vincere__then__furia",
+          "count": 56204,
+          "probability": 0.056204
+        },
+        {
+          "key": "vitality__then__furia__then__natus vincere",
+          "count": 45242,
+          "probability": 0.045242
+        },
+        {
+          "key": "vitality__then__natus vincere__then__mouz",
+          "count": 37257,
+          "probability": 0.037257
+        },
+        {
+          "key": "natus vincere__then__vitality__then__furia",
+          "count": 34583,
+          "probability": 0.034583
+        },
+        {
+          "key": "vitality__then__furia__then__aurora",
+          "count": 31963,
+          "probability": 0.031963
+        },
+        {
+          "key": "vitality__then__natus vincere__then__aurora",
+          "count": 31417,
+          "probability": 0.031417
+        },
+        {
+          "key": "vitality__then__furia__then__mouz",
+          "count": 31060,
+          "probability": 0.03106
+        },
+        {
+          "key": "vitality__then__aurora__then__furia",
+          "count": 27229,
+          "probability": 0.027229
+        },
+        {
+          "key": "furia__then__vitality__then__natus vincere",
+          "count": 24365,
+          "probability": 0.024365
+        },
+        {
+          "key": "natus vincere__then__vitality__then__mouz",
+          "count": 23970,
+          "probability": 0.02397
+        },
+        {
+          "key": "vitality__then__aurora__then__natus vincere",
+          "count": 23132,
+          "probability": 0.023132
+        },
+        {
+          "key": "vitality__then__aurora__then__mouz",
+          "count": 19645,
+          "probability": 0.019645
+        },
+        {
+          "key": "natus vincere__then__vitality__then__aurora",
+          "count": 19290,
+          "probability": 0.01929
+        },
+        {
+          "key": "vitality__then__mouz__then__natus vincere",
+          "count": 18125,
+          "probability": 0.018125
+        },
+        {
+          "key": "furia__then__vitality__then__mouz",
+          "count": 17392,
+          "probability": 0.017392
+        },
+        {
+          "key": "furia__then__vitality__then__aurora",
+          "count": 16821,
+          "probability": 0.016821
+        },
+        {
+          "key": "natus vincere__then__furia__then__vitality",
+          "count": 16789,
+          "probability": 0.016789
+        },
+        {
+          "key": "vitality__then__mouz__then__furia",
+          "count": 16715,
+          "probability": 0.016715
+        },
+        {
+          "key": "natus vincere__then__mouz__then__vitality",
+          "count": 15950,
+          "probability": 0.01595
+        },
+        {
+          "key": "vitality__then__natus vincere__then__magic",
+          "count": 15149,
+          "probability": 0.015149
+        },
+        {
+          "key": "aurora__then__vitality__then__furia",
+          "count": 13359,
+          "probability": 0.013359
+        },
+        {
+          "key": "natus vincere__then__mouz__then__furia",
+          "count": 12295,
+          "probability": 0.012295
+        },
+        {
+          "key": "furia__then__natus vincere__then__vitality",
+          "count": 12122,
+          "probability": 0.012122
+        },
+        {
+          "key": "vitality__then__mouz__then__aurora",
+          "count": 12072,
+          "probability": 0.012072
+        },
+        {
+          "key": "natus vincere__then__furia__then__mouz",
+          "count": 11942,
+          "probability": 0.011942
+        },
+        {
+          "key": "furia__then__mouz__then__vitality",
+          "count": 11537,
+          "probability": 0.011537
+        },
+        {
+          "key": "vitality__then__natus vincere__then__mibr",
+          "count": 11428,
+          "probability": 0.011428
+        },
+        {
+          "key": "aurora__then__vitality__then__natus vincere",
+          "count": 11227,
+          "probability": 0.011227
+        },
+        {
+          "key": "aurora__then__vitality__then__mouz",
+          "count": 10492,
+          "probability": 0.010492
+        },
+        {
+          "key": "vitality__then__furia__then__magic",
+          "count": 10478,
+          "probability": 0.010478
+        },
+        {
+          "key": "natus vincere__then__vitality__then__magic",
+          "count": 9962,
+          "probability": 0.009962
+        },
+        {
+          "key": "furia__then__mouz__then__natus vincere",
+          "count": 9407,
+          "probability": 0.009407
+        },
+        {
+          "key": "mouz__then__natus vincere__then__vitality",
+          "count": 9354,
+          "probability": 0.009354
+        },
+        {
+          "key": "mouz__then__vitality__then__natus vincere",
+          "count": 8504,
+          "probability": 0.008504
+        },
+        {
+          "key": "natus vincere__then__aurora__then__vitality",
+          "count": 8429,
+          "probability": 0.008429
+        },
+        {
+          "key": "furia__then__natus vincere__then__mouz",
+          "count": 8333,
+          "probability": 0.008333
+        },
+        {
+          "key": "mouz__then__vitality__then__furia",
+          "count": 7661,
+          "probability": 0.007661
+        },
+        {
+          "key": "mouz__then__furia__then__vitality",
+          "count": 7602,
+          "probability": 0.007602
+        },
+        {
+          "key": "vitality__then__aurora__then__magic",
+          "count": 7438,
+          "probability": 0.007438
+        },
+        {
+          "key": "furia__then__aurora__then__vitality",
+          "count": 7194,
+          "probability": 0.007194
+        },
+        {
+          "key": "mouz__then__natus vincere__then__furia",
+          "count": 7189,
+          "probability": 0.007189
+        },
+        {
+          "key": "natus vincere__then__vitality__then__mibr",
+          "count": 6877,
+          "probability": 0.006877
+        },
+        {
+          "key": "aurora__then__mouz__then__vitality",
+          "count": 6708,
+          "probability": 0.006708
+        },
+        {
+          "key": "aurora__then__furia__then__vitality",
+          "count": 6328,
+          "probability": 0.006328
+        },
+        {
+          "key": "mouz__then__furia__then__natus vincere",
+          "count": 6323,
+          "probability": 0.006323
+        },
+        {
+          "key": "natus vincere__then__mouz__then__aurora",
+          "count": 6236,
+          "probability": 0.006236
+        },
+        {
+          "key": "vitality__then__aurora__then__mibr",
+          "count": 6230,
+          "probability": 0.00623
+        },
+        {
+          "key": "furia__then__mouz__then__aurora",
+          "count": 6134,
+          "probability": 0.006134
+        },
+        {
+          "key": "natus vincere__then__aurora__then__mouz",
+          "count": 5885,
+          "probability": 0.005885
+        },
+        {
+          "key": "furia__then__vitality__then__magic",
+          "count": 5737,
+          "probability": 0.005737
+        },
+        {
+          "key": "aurora__then__natus vincere__then__vitality",
+          "count": 5612,
+          "probability": 0.005612
+        },
+        {
+          "key": "mouz__then__vitality__then__aurora",
+          "count": 5525,
+          "probability": 0.005525
+        },
+        {
+          "key": "furia__then__aurora__then__mouz",
+          "count": 5392,
+          "probability": 0.005392
+        },
+        {
+          "key": "aurora__then__mouz__then__furia",
+          "count": 5157,
+          "probability": 0.005157
+        },
+        {
+          "key": "aurora__then__furia__then__mouz",
+          "count": 4924,
+          "probability": 0.004924
+        },
+        {
+          "key": "vitality__then__mouz__then__mibr",
+          "count": 4798,
+          "probability": 0.004798
+        },
+        {
+          "key": "mouz__then__aurora__then__vitality",
+          "count": 4581,
+          "probability": 0.004581
+        },
+        {
+          "key": "vitality__then__mibr__then__natus vincere",
+          "count": 4572,
+          "probability": 0.004572
+        },
+        {
+          "key": "natus vincere__then__mouz__then__magic",
+          "count": 4461,
+          "probability": 0.004461
+        },
+        {
+          "key": "vitality__then__furia__then__mibr",
+          "count": 4457,
+          "probability": 0.004457
+        },
+        {
+          "key": "aurora__then__mouz__then__natus vincere",
+          "count": 4429,
+          "probability": 0.004429
+        },
+        {
+          "key": "vitality__then__magic__then__natus vincere",
+          "count": 4352,
+          "probability": 0.004352
+        },
+        {
+          "key": "vitality__then__magic__then__furia",
+          "count": 4148,
+          "probability": 0.004148
+        },
+        {
+          "key": "natus vincere__then__furia__then__magic",
+          "count": 4084,
+          "probability": 0.004084
+        },
+        {
+          "key": "mouz__then__furia__then__aurora",
+          "count": 4034,
+          "probability": 0.004034
+        },
+        {
+          "key": "natus vincere__then__magic__then__vitality",
+          "count": 3834,
+          "probability": 0.003834
+        },
+        {
+          "key": "aurora__then__natus vincere__then__mouz",
+          "count": 3830,
+          "probability": 0.00383
+        },
+        {
+          "key": "aurora__then__vitality__then__magic",
+          "count": 3737,
+          "probability": 0.003737
+        },
+        {
+          "key": "mouz__then__aurora__then__furia",
+          "count": 3662,
+          "probability": 0.003662
+        },
+        {
+          "key": "mouz__then__natus vincere__then__aurora",
+          "count": 3605,
+          "probability": 0.003605
+        },
+        {
+          "key": "vitality__then__magic__then__aurora",
+          "count": 3487,
+          "probability": 0.003487
+        },
+        {
+          "key": "vitality__then__mibr__then__aurora",
+          "count": 3231,
+          "probability": 0.003231
+        },
+        {
+          "key": "mouz__then__aurora__then__natus vincere",
+          "count": 3039,
+          "probability": 0.003039
+        },
+        {
+          "key": "furia__then__mouz__then__magic",
+          "count": 2905,
+          "probability": 0.002905
+        },
+        {
+          "key": "furia__then__natus vincere__then__magic",
+          "count": 2810,
+          "probability": 0.00281
+        },
+        {
+          "key": "natus vincere__then__mouz__then__mibr",
+          "count": 2744,
+          "probability": 0.002744
+        },
+        {
+          "key": "aurora__then__vitality__then__mibr",
+          "count": 2732,
+          "probability": 0.002732
+        },
+        {
+          "key": "natus vincere__then__magic__then__mouz",
+          "count": 2727,
+          "probability": 0.002727
+        },
+        {
+          "key": "vitality__then__mibr__then__mouz",
+          "count": 2631,
+          "probability": 0.002631
+        },
+        {
+          "key": "mouz__then__natus vincere__then__magic",
+          "count": 2573,
+          "probability": 0.002573
+        },
+        {
+          "key": "vitality__then__natus vincere__then__nrg",
+          "count": 2535,
+          "probability": 0.002535
+        },
+        {
+          "key": "furia__then__magic__then__vitality",
+          "count": 2508,
+          "probability": 0.002508
+        },
+        {
+          "key": "natus vincere__then__magic__then__furia",
+          "count": 2457,
+          "probability": 0.002457
+        },
+        {
+          "key": "natus vincere__then__aurora__then__magic",
+          "count": 2399,
+          "probability": 0.002399
+        },
+        {
+          "key": "furia__then__vitality__then__mibr",
+          "count": 2317,
+          "probability": 0.002317
+        },
+        {
+          "key": "mouz__then__vitality__then__mibr",
+          "count": 2216,
+          "probability": 0.002216
+        },
+        {
+          "key": "vitality__then__mibr__then__furia",
+          "count": 1974,
+          "probability": 0.001974
+        },
+        {
+          "key": "furia__then__magic__then__mouz",
+          "count": 1960,
+          "probability": 0.00196
+        },
+        {
+          "key": "vitality__then__furia__then__nrg",
+          "count": 1927,
+          "probability": 0.001927
+        },
+        {
+          "key": "mouz__then__furia__then__magic",
+          "count": 1924,
+          "probability": 0.001924
+        },
+        {
+          "key": "natus vincere__then__magic__then__aurora",
+          "count": 1895,
+          "probability": 0.001895
+        },
+        {
+          "key": "aurora__then__mouz__then__magic",
+          "count": 1828,
+          "probability": 0.001828
+        },
+        {
+          "key": "furia__then__magic__then__natus vincere",
+          "count": 1763,
+          "probability": 0.001763
+        },
+        {
+          "key": "furia__then__aurora__then__magic",
+          "count": 1733,
+          "probability": 0.001733
+        },
+        {
+          "key": "aurora__then__furia__then__magic",
+          "count": 1681,
+          "probability": 0.001681
+        },
+        {
+          "key": "natus vincere__then__vitality__then__nrg",
+          "count": 1660,
+          "probability": 0.00166
+        },
+        {
+          "key": "mouz__then__natus vincere__then__mibr",
+          "count": 1653,
+          "probability": 0.001653
+        },
+        {
+          "key": "aurora__then__magic__then__vitality",
+          "count": 1644,
+          "probability": 0.001644
+        },
+        {
+          "key": "aurora__then__natus vincere__then__magic",
+          "count": 1601,
+          "probability": 0.001601
+        },
+        {
+          "key": "natus vincere__then__mibr__then__vitality",
+          "count": 1512,
+          "probability": 0.001512
+        },
+        {
+          "key": "furia__then__magic__then__aurora",
+          "count": 1467,
+          "probability": 0.001467
+        },
+        {
+          "key": "vitality__then__magic__then__mibr",
+          "count": 1414,
+          "probability": 0.001414
+        },
+        {
+          "key": "mouz__then__aurora__then__magic",
+          "count": 1253,
+          "probability": 0.001253
+        },
+        {
+          "key": "aurora__then__mouz__then__mibr",
+          "count": 1244,
+          "probability": 0.001244
+        },
+        {
+          "key": "vitality__then__aurora__then__nrg",
+          "count": 1196,
+          "probability": 0.001196
+        },
+        {
+          "key": "vitality__then__mibr__then__magic",
+          "count": 1185,
+          "probability": 0.001185
+        },
+        {
+          "key": "aurora__then__magic__then__mouz",
+          "count": 1144,
+          "probability": 0.001144
+        },
+        {
+          "key": "natus vincere__then__furia__then__nrg",
+          "count": 1125,
+          "probability": 0.001125
+        },
+        {
+          "key": "furia__then__vitality__then__nrg",
+          "count": 1108,
+          "probability": 0.001108
+        },
+        {
+          "key": "natus vincere__then__mibr__then__mouz",
+          "count": 1074,
+          "probability": 0.001074
+        },
+        {
+          "key": "mouz__then__aurora__then__mibr",
+          "count": 1029,
+          "probability": 0.001029
+        },
+        {
+          "key": "aurora__then__magic__then__furia",
+          "count": 1024,
+          "probability": 0.001024
+        },
+        {
+          "key": "mouz__then__mibr__then__vitality",
+          "count": 1020,
+          "probability": 0.00102
+        },
+        {
+          "key": "magic__then__natus vincere__then__vitality",
+          "count": 1005,
+          "probability": 0.001005
+        },
+        {
+          "key": "aurora__then__magic__then__natus vincere",
+          "count": 942,
+          "probability": 0.000942
+        },
+        {
+          "key": "mibr__then__vitality__then__natus vincere",
+          "count": 919,
+          "probability": 0.000919
+        },
+        {
+          "key": "mouz__then__mibr__then__natus vincere",
+          "count": 919,
+          "probability": 0.000919
+        },
+        {
+          "key": "furia__then__mouz__then__mibr",
+          "count": 915,
+          "probability": 0.000915
+        },
+        {
+          "key": "magic__then__vitality__then__natus vincere",
+          "count": 878,
+          "probability": 0.000878
+        },
+        {
+          "key": "magic__then__furia__then__vitality",
+          "count": 871,
+          "probability": 0.000871
+        },
+        {
+          "key": "magic__then__vitality__then__furia",
+          "count": 824,
+          "probability": 0.000824
+        },
+        {
+          "key": "mouz__then__magic__then__furia",
+          "count": 790,
+          "probability": 0.00079
+        },
+        {
+          "key": "furia__then__natus vincere__then__nrg",
+          "count": 783,
+          "probability": 0.000783
+        },
+        {
+          "key": "mouz__then__magic__then__natus vincere",
+          "count": 782,
+          "probability": 0.000782
+        },
+        {
+          "key": "magic__then__furia__then__natus vincere",
+          "count": 768,
+          "probability": 0.000768
+        },
+        {
+          "key": "magic__then__furia__then__mouz",
+          "count": 741,
+          "probability": 0.000741
+        },
+        {
+          "key": "magic__then__aurora__then__vitality",
+          "count": 710,
+          "probability": 0.00071
+        },
+        {
+          "key": "magic__then__natus vincere__then__mouz",
+          "count": 704,
+          "probability": 0.000704
+        },
+        {
+          "key": "magic__then__vitality__then__aurora",
+          "count": 685,
+          "probability": 0.000685
+        },
+        {
+          "key": "aurora__then__mibr__then__vitality",
+          "count": 649,
+          "probability": 0.000649
+        },
+        {
+          "key": "mouz__then__mibr__then__aurora",
+          "count": 640,
+          "probability": 0.00064
+        },
+        {
+          "key": "mouz__then__furia__then__mibr",
+          "count": 634,
+          "probability": 0.000634
+        },
+        {
+          "key": "mibr__then__vitality__then__aurora",
+          "count": 629,
+          "probability": 0.000629
+        },
+        {
+          "key": "magic__then__natus vincere__then__furia",
+          "count": 628,
+          "probability": 0.000628
+        },
+        {
+          "key": "natus vincere__then__magic__then__mibr",
+          "count": 617,
+          "probability": 0.000617
+        },
+        {
+          "key": "aurora__then__vitality__then__nrg",
+          "count": 605,
+          "probability": 0.000605
+        },
+        {
+          "key": "magic__then__furia__then__aurora",
+          "count": 580,
+          "probability": 0.00058
+        },
+        {
+          "key": "natus vincere__then__aurora__then__nrg",
+          "count": 567,
+          "probability": 0.000567
+        },
+        {
+          "key": "mouz__then__magic__then__aurora",
+          "count": 562,
+          "probability": 0.000562
+        },
+        {
+          "key": "furia__then__mibr__then__vitality",
+          "count": 548,
+          "probability": 0.000548
+        },
+        {
+          "key": "magic__then__natus vincere__then__aurora",
+          "count": 537,
+          "probability": 0.000537
+        },
+        {
+          "key": "mibr__then__vitality__then__mouz",
+          "count": 532,
+          "probability": 0.000532
+        },
+        {
+          "key": "magic__then__aurora__then__mouz",
+          "count": 529,
+          "probability": 0.000529
+        },
+        {
+          "key": "aurora__then__mibr__then__mouz",
+          "count": 517,
+          "probability": 0.000517
+        },
+        {
+          "key": "magic__then__aurora__then__furia",
+          "count": 493,
+          "probability": 0.000493
+        },
+        {
+          "key": "furia__then__aurora__then__nrg",
+          "count": 481,
+          "probability": 0.000481
+        },
+        {
+          "key": "aurora__then__furia__then__nrg",
+          "count": 470,
+          "probability": 0.00047
+        },
+        {
+          "key": "natus vincere__then__mouz__then__nrg",
+          "count": 463,
+          "probability": 0.000463
+        },
+        {
+          "key": "magic__then__mouz__then__natus vincere",
+          "count": 462,
+          "probability": 0.000462
+        },
+        {
+          "key": "magic__then__aurora__then__natus vincere",
+          "count": 458,
+          "probability": 0.000458
+        },
+        {
+          "key": "natus vincere__then__mibr__then__magic",
+          "count": 452,
+          "probability": 0.000452
+        },
+        {
+          "key": "magic__then__mouz__then__furia",
+          "count": 439,
+          "probability": 0.000439
+        },
+        {
+          "key": "furia__then__mibr__then__mouz",
+          "count": 401,
+          "probability": 0.000401
+        },
+        {
+          "key": "mibr__then__mouz__then__vitality",
+          "count": 400,
+          "probability": 0.0004
+        },
+        {
+          "key": "mibr__then__mouz__then__natus vincere",
+          "count": 398,
+          "probability": 0.000398
+        },
+        {
+          "key": "mibr__then__vitality__then__furia",
+          "count": 397,
+          "probability": 0.000397
+        },
+        {
+          "key": "natus vincere__then__nrg__then__vitality",
+          "count": 389,
+          "probability": 0.000389
+        },
+        {
+          "key": "mouz__then__mibr__then__furia",
+          "count": 386,
+          "probability": 0.000386
+        },
+        {
+          "key": "magic__then__mouz__then__aurora",
+          "count": 370,
+          "probability": 0.00037
+        },
+        {
+          "key": "aurora__then__natus vincere__then__nrg",
+          "count": 367,
+          "probability": 0.000367
+        },
+        {
+          "key": "mibr__then__natus vincere__then__vitality",
+          "count": 327,
+          "probability": 0.000327
+        },
+        {
+          "key": "mouz__then__mibr__then__magic",
+          "count": 327,
+          "probability": 0.000327
+        },
+        {
+          "key": "natus vincere__then__magic__then__nrg",
+          "count": 315,
+          "probability": 0.000315
+        },
+        {
+          "key": "magic__then__vitality__then__mibr",
+          "count": 306,
+          "probability": 0.000306
+        },
+        {
+          "key": "mouz__then__magic__then__mibr",
+          "count": 299,
+          "probability": 0.000299
+        },
+        {
+          "key": "vitality__then__nrg__then__aurora",
+          "count": 288,
+          "probability": 0.000288
+        },
+        {
+          "key": "aurora__then__magic__then__mibr",
+          "count": 287,
+          "probability": 0.000287
+        },
+        {
+          "key": "furia__then__nrg__then__vitality",
+          "count": 284,
+          "probability": 0.000284
+        },
+        {
+          "key": "furia__then__magic__then__mibr",
+          "count": 282,
+          "probability": 0.000282
+        },
+        {
+          "key": "mibr__then__natus vincere__then__mouz",
+          "count": 278,
+          "probability": 0.000278
+        },
+        {
+          "key": "vitality__then__nrg__then__furia",
+          "count": 268,
+          "probability": 0.000268
+        },
+        {
+          "key": "natus vincere__then__nrg__then__furia",
+          "count": 255,
+          "probability": 0.000255
+        },
+        {
+          "key": "vitality__then__mibr__then__nrg",
+          "count": 247,
+          "probability": 0.000247
+        },
+        {
+          "key": "mouz__then__natus vincere__then__nrg",
+          "count": 241,
+          "probability": 0.000241
+        },
+        {
+          "key": "furia__then__mouz__then__nrg",
+          "count": 239,
+          "probability": 0.000239
+        },
+        {
+          "key": "mibr__then__aurora__then__vitality",
+          "count": 236,
+          "probability": 0.000236
+        },
+        {
+          "key": "mibr__then__mouz__then__aurora",
+          "count": 233,
+          "probability": 0.000233
+        },
+        {
+          "key": "mibr__then__vitality__then__magic",
+          "count": 230,
+          "probability": 0.00023
+        },
+        {
+          "key": "furia__then__nrg__then__natus vincere",
+          "count": 209,
+          "probability": 0.000209
+        },
+        {
+          "key": "magic__then__natus vincere__then__mibr",
+          "count": 199,
+          "probability": 0.000199
+        },
+        {
+          "key": "aurora__then__mibr__then__magic",
+          "count": 197,
+          "probability": 0.000197
+        },
+        {
+          "key": "furia__then__magic__then__nrg",
+          "count": 195,
+          "probability": 0.000195
+        },
+        {
+          "key": "furia__then__mibr__then__magic",
+          "count": 194,
+          "probability": 0.000194
+        },
+        {
+          "key": "mouz__then__furia__then__nrg",
+          "count": 192,
+          "probability": 0.000192
+        },
+        {
+          "key": "furia__then__nrg__then__aurora",
+          "count": 188,
+          "probability": 0.000188
+        },
+        {
+          "key": "magic__then__mouz__then__mibr",
+          "count": 181,
+          "probability": 0.000181
+        },
+        {
+          "key": "aurora__then__nrg__then__vitality",
+          "count": 181,
+          "probability": 0.000181
+        },
+        {
+          "key": "mibr__then__aurora__then__mouz",
+          "count": 177,
+          "probability": 0.000177
+        },
+        {
+          "key": "aurora__then__mouz__then__nrg",
+          "count": 177,
+          "probability": 0.000177
+        },
+        {
+          "key": "vitality__then__nrg__then__natus vincere",
+          "count": 176,
+          "probability": 0.000176
+        },
+        {
+          "key": "magic__then__mibr__then__vitality",
+          "count": 173,
+          "probability": 0.000173
+        },
+        {
+          "key": "natus vincere__then__nrg__then__aurora",
+          "count": 173,
+          "probability": 0.000173
+        },
+        {
+          "key": "mibr__then__mouz__then__magic",
+          "count": 158,
+          "probability": 0.000158
+        },
+        {
+          "key": "mibr__then__mouz__then__furia",
+          "count": 152,
+          "probability": 0.000152
+        },
+        {
+          "key": "mibr__then__furia__then__vitality",
+          "count": 150,
+          "probability": 0.00015
+        },
+        {
+          "key": "aurora__then__nrg__then__furia",
+          "count": 143,
+          "probability": 0.000143
+        },
+        {
+          "key": "natus vincere__then__mibr__then__nrg",
+          "count": 141,
+          "probability": 0.000141
+        },
+        {
+          "key": "magic__then__aurora__then__mibr",
+          "count": 132,
+          "probability": 0.000132
+        },
+        {
+          "key": "magic__then__mibr__then__natus vincere",
+          "count": 121,
+          "probability": 0.000121
+        },
+        {
+          "key": "aurora__then__nrg__then__natus vincere",
+          "count": 118,
+          "probability": 0.000118
+        },
+        {
+          "key": "natus vincere__then__nrg__then__mouz",
+          "count": 114,
+          "probability": 0.000114
+        },
+        {
+          "key": "magic__then__mibr__then__aurora",
+          "count": 113,
+          "probability": 0.000113
+        },
+        {
+          "key": "natus vincere__then__nrg__then__magic",
+          "count": 112,
+          "probability": 0.000112
+        },
+        {
+          "key": "mibr__then__magic__then__vitality",
+          "count": 111,
+          "probability": 0.000111
+        },
+        {
+          "key": "magic__then__furia__then__mibr",
+          "count": 111,
+          "probability": 0.000111
+        },
+        {
+          "key": "magic__then__mibr__then__mouz",
+          "count": 109,
+          "probability": 0.000109
+        },
+        {
+          "key": "mouz__then__aurora__then__nrg",
+          "count": 109,
+          "probability": 0.000109
+        },
+        {
+          "key": "mibr__then__magic__then__mouz",
+          "count": 103,
+          "probability": 0.000103
+        },
+        {
+          "key": "mibr__then__furia__then__mouz",
+          "count": 102,
+          "probability": 0.000102
+        },
+        {
+          "key": "vitality__then__nrg__then__mibr",
+          "count": 102,
+          "probability": 0.000102
+        },
+        {
+          "key": "aurora__then__magic__then__nrg",
+          "count": 98,
+          "probability": 9.8e-05
+        },
+        {
+          "key": "mibr__then__natus vincere__then__magic",
+          "count": 93,
+          "probability": 9.3e-05
+        },
+        {
+          "key": "mibr__then__magic__then__natus vincere",
+          "count": 93,
+          "probability": 9.3e-05
+        },
+        {
+          "key": "natus vincere__then__nrg__then__mibr",
+          "count": 86,
+          "probability": 8.6e-05
+        },
+        {
+          "key": "furia__then__nrg__then__mouz",
+          "count": 85,
+          "probability": 8.5e-05
+        },
+        {
+          "key": "furia__then__nrg__then__magic",
+          "count": 81,
+          "probability": 8.1e-05
+        },
+        {
+          "key": "magic__then__furia__then__nrg",
+          "count": 79,
+          "probability": 7.9e-05
+        },
+        {
+          "key": "magic__then__mibr__then__furia",
+          "count": 77,
+          "probability": 7.7e-05
+        },
+        {
+          "key": "mibr__then__aurora__then__magic",
+          "count": 68,
+          "probability": 6.8e-05
+        },
+        {
+          "key": "aurora__then__mibr__then__nrg",
+          "count": 67,
+          "probability": 6.7e-05
+        },
+        {
+          "key": "mibr__then__magic__then__aurora",
+          "count": 64,
+          "probability": 6.4e-05
+        },
+        {
+          "key": "magic__then__natus vincere__then__nrg",
+          "count": 61,
+          "probability": 6.1e-05
+        },
+        {
+          "key": "furia__then__mibr__then__nrg",
+          "count": 60,
+          "probability": 6e-05
+        },
+        {
+          "key": "mibr__then__magic__then__furia",
+          "count": 59,
+          "probability": 5.9e-05
+        },
+        {
+          "key": "mibr__then__furia__then__magic",
+          "count": 57,
+          "probability": 5.7e-05
+        },
+        {
+          "key": "aurora__then__nrg__then__mouz",
+          "count": 53,
+          "probability": 5.3e-05
+        },
+        {
+          "key": "aurora__then__nrg__then__mibr",
+          "count": 46,
+          "probability": 4.6e-05
+        },
+        {
+          "key": "nrg__then__furia__then__vitality",
+          "count": 39,
+          "probability": 3.9e-05
+        },
+        {
+          "key": "mouz__then__mibr__then__nrg",
+          "count": 39,
+          "probability": 3.9e-05
+        },
+        {
+          "key": "mibr__then__vitality__then__nrg",
+          "count": 39,
+          "probability": 3.9e-05
+        },
+        {
+          "key": "aurora__then__nrg__then__magic",
+          "count": 38,
+          "probability": 3.8e-05
+        },
+        {
+          "key": "magic__then__aurora__then__nrg",
+          "count": 37,
+          "probability": 3.7e-05
+        },
+        {
+          "key": "mibr__then__natus vincere__then__nrg",
+          "count": 34,
+          "probability": 3.4e-05
+        },
+        {
+          "key": "mibr__then__aurora__then__nrg",
+          "count": 33,
+          "probability": 3.3e-05
+        },
+        {
+          "key": "nrg__then__aurora__then__furia",
+          "count": 28,
+          "probability": 2.8e-05
+        },
+        {
+          "key": "mouz__then__nrg__then__aurora",
+          "count": 28,
+          "probability": 2.8e-05
+        },
+        {
+          "key": "nrg__then__furia__then__aurora",
+          "count": 26,
+          "probability": 2.6e-05
+        },
+        {
+          "key": "furia__then__nrg__then__mibr",
+          "count": 26,
+          "probability": 2.6e-05
+        },
+        {
+          "key": "nrg__then__natus vincere__then__furia",
+          "count": 24,
+          "probability": 2.4e-05
+        },
+        {
+          "key": "nrg__then__aurora__then__vitality",
+          "count": 22,
+          "probability": 2.2e-05
+        },
+        {
+          "key": "nrg__then__natus vincere__then__vitality",
+          "count": 21,
+          "probability": 2.1e-05
+        },
+        {
+          "key": "mibr__then__nrg__then__vitality",
+          "count": 21,
+          "probability": 2.1e-05
+        },
+        {
+          "key": "mouz__then__nrg__then__furia",
+          "count": 21,
+          "probability": 2.1e-05
+        },
+        {
+          "key": "nrg__then__vitality__then__furia",
+          "count": 19,
+          "probability": 1.9e-05
+        },
+        {
+          "key": "mibr__then__mouz__then__nrg",
+          "count": 19,
+          "probability": 1.9e-05
+        },
+        {
+          "key": "nrg__then__furia__then__natus vincere",
+          "count": 19,
+          "probability": 1.9e-05
+        },
+        {
+          "key": "mibr__then__furia__then__nrg",
+          "count": 19,
+          "probability": 1.9e-05
+        },
+        {
+          "key": "mibr__then__nrg__then__natus vincere",
+          "count": 18,
+          "probability": 1.8e-05
+        },
+        {
+          "key": "nrg__then__natus vincere__then__aurora",
+          "count": 18,
+          "probability": 1.8e-05
+        },
+        {
+          "key": "nrg__then__vitality__then__aurora",
+          "count": 16,
+          "probability": 1.6e-05
+        },
+        {
+          "key": "mouz__then__nrg__then__mibr",
+          "count": 16,
+          "probability": 1.6e-05
+        },
+        {
+          "key": "magic__then__nrg__then__aurora",
+          "count": 15,
+          "probability": 1.5e-05
+        },
+        {
+          "key": "mouz__then__nrg__then__natus vincere",
+          "count": 15,
+          "probability": 1.5e-05
+        },
+        {
+          "key": "mibr__then__magic__then__nrg",
+          "count": 12,
+          "probability": 1.2e-05
+        },
+        {
+          "key": "nrg__then__mibr__then__natus vincere",
+          "count": 10,
+          "probability": 1e-05
+        },
+        {
+          "key": "nrg__then__natus vincere__then__magic",
+          "count": 10,
+          "probability": 1e-05
+        },
+        {
+          "key": "nrg__then__mibr__then__vitality",
+          "count": 10,
+          "probability": 1e-05
+        },
+        {
+          "key": "magic__then__mibr__then__nrg",
+          "count": 10,
+          "probability": 1e-05
+        },
+        {
+          "key": "magic__then__nrg__then__furia",
+          "count": 10,
+          "probability": 1e-05
+        },
+        {
+          "key": "nrg__then__vitality__then__natus vincere",
+          "count": 9,
+          "probability": 9e-06
+        },
+        {
+          "key": "magic__then__nrg__then__natus vincere",
+          "count": 9,
+          "probability": 9e-06
+        },
+        {
+          "key": "nrg__then__furia__then__mouz",
+          "count": 8,
+          "probability": 8e-06
+        },
+        {
+          "key": "mibr__then__nrg__then__furia",
+          "count": 8,
+          "probability": 8e-06
+        },
+        {
+          "key": "mibr__then__nrg__then__aurora",
+          "count": 8,
+          "probability": 8e-06
+        },
+        {
+          "key": "mibr__then__nrg__then__magic",
+          "count": 8,
+          "probability": 8e-06
+        },
+        {
+          "key": "nrg__then__mibr__then__furia",
+          "count": 7,
+          "probability": 7e-06
+        },
+        {
+          "key": "nrg__then__aurora__then__mibr",
+          "count": 7,
+          "probability": 7e-06
+        },
+        {
+          "key": "nrg__then__furia__then__magic",
+          "count": 7,
+          "probability": 7e-06
+        },
+        {
+          "key": "mibr__then__nrg__then__mouz",
+          "count": 7,
+          "probability": 7e-06
+        },
+        {
+          "key": "nrg__then__aurora__then__mouz",
+          "count": 6,
+          "probability": 6e-06
+        },
+        {
+          "key": "nrg__then__mibr__then__aurora",
+          "count": 6,
+          "probability": 6e-06
+        },
+        {
+          "key": "magic__then__nrg__then__mibr",
+          "count": 6,
+          "probability": 6e-06
+        },
+        {
+          "key": "nrg__then__furia__then__mibr",
+          "count": 6,
+          "probability": 6e-06
+        },
+        {
+          "key": "nrg__then__aurora__then__natus vincere",
+          "count": 6,
+          "probability": 6e-06
+        },
+        {
+          "key": "nrg__then__natus vincere__then__mouz",
+          "count": 5,
+          "probability": 5e-06
+        },
+        {
+          "key": "nrg__then__aurora__then__magic",
+          "count": 5,
+          "probability": 5e-06
+        },
+        {
+          "key": "nrg__then__mibr__then__mouz",
+          "count": 4,
+          "probability": 4e-06
+        },
+        {
+          "key": "nrg__then__natus vincere__then__mibr",
+          "count": 3,
+          "probability": 3e-06
+        },
+        {
+          "key": "nrg__then__magic__then__aurora",
+          "count": 3,
+          "probability": 3e-06
+        },
+        {
+          "key": "nrg__then__vitality__then__mibr",
+          "count": 3,
+          "probability": 3e-06
+        },
+        {
+          "key": "nrg__then__magic__then__natus vincere",
+          "count": 3,
+          "probability": 3e-06
+        },
+        {
+          "key": "nrg__then__mibr__then__magic",
+          "count": 3,
+          "probability": 3e-06
+        },
+        {
+          "key": "nrg__then__mouz__then__aurora",
+          "count": 2,
+          "probability": 2e-06
+        },
+        {
+          "key": "nrg__then__mouz__then__natus vincere",
+          "count": 2,
+          "probability": 2e-06
+        },
+        {
+          "key": "nrg__then__magic__then__furia",
+          "count": 2,
+          "probability": 2e-06
+        },
+        {
+          "key": "nrg__then__mouz__then__furia",
+          "count": 2,
+          "probability": 2e-06
+        },
+        {
+          "key": "nrg__then__mouz__then__mibr",
+          "count": 1,
+          "probability": 1e-06
+        }
+      ],
+      "complete_path_schema": [
+        "upper_qf1_winner",
+        "upper_qf2_winner",
+        "upper_qf3_winner",
+        "upper_qf4_winner",
+        "upper_sf1_winner",
+        "upper_sf2_winner",
+        "upper_final_winner",
+        "lower_r1a_winner",
+        "lower_r1b_winner",
+        "lower_sf_a_winner",
+        "lower_sf_b_winner",
+        "lower_r3_winner",
+        "lower_final_winner",
+        "grand_final_winner",
+        "grand_final_runner_up"
+      ],
+      "complete_bracket_path_unique_count": 12423,
+      "complete_bracket_paths": [
+        {
+          "key": "mouz__then__vitality__then__natus vincere__then__furia__then__vitality__then__natus vincere__then__vitality__then__magic__then__aurora__then__furia__then__aurora__then__furia__then__natus vincere__then__vitality__then__natus vincere",
+          "count": 4506,
+          "probability": 0.004506
+        },
+        {
+          "key": "mouz__then__vitality__then__natus vincere__then__furia__then__vitality__then__furia__then__vitality__then__magic__then__aurora__then__natus vincere__then__aurora__then__natus vincere__then__natus vincere__then__vitality__then__natus vincere",
+          "count": 3798,
+          "probability": 0.003798
+        },
+        {
+          "key": "mouz__then__vitality__then__natus vincere__then__furia__then__vitality__then__natus vincere__then__vitality__then__magic__then__aurora__then__furia__then__aurora__then__aurora__then__natus vincere__then__vitality__then__natus vincere",
+          "count": 3607,
+          "probability": 0.003607
+        }
+      ],
+      "cinderella_definition": "P(Champion) < 0.10 in this run",
+      "cinderella_grand_final_runs": [
+        {
+          "key": "mouz",
+          "count": 236105,
+          "probability": 0.236105
+        },
+        {
+          "key": "aurora",
+          "count": 227226,
+          "probability": 0.227226
+        },
+        {
+          "key": "magic",
+          "count": 54874,
+          "probability": 0.054874
+        },
+        {
+          "key": "mibr",
+          "count": 29818,
+          "probability": 0.029818
+        },
+        {
+          "key": "nrg",
+          "count": 3967,
+          "probability": 0.003967
+        }
+      ]
+    }
+  }
+}

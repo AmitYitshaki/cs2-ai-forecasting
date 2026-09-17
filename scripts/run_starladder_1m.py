@@ -20,6 +20,7 @@ if str(PROJECT_ROOT) not in sys.path:
 
 from elo import PointInTimeEngine
 from src.models.bracket_simulator import (
+    COMPLETE_PATH_STAGES,
     N_ELO_FEATURES_EXPECTED_ORDER,
     TEAM_DISPLAY_NAMES,
     TournamentAnalytics,
@@ -135,6 +136,7 @@ def assert_preflight_equivalence(model: object, state: TournamentEloState) -> No
     assert fast_analytics.grand_final_matchups == slow_analytics.grand_final_matchups
     assert fast_analytics.runner_ups == slow_analytics.runner_ups
     assert fast_analytics.exact_podiums == slow_analytics.exact_podiums
+    assert fast_analytics.complete_paths == slow_analytics.complete_paths
     assert (
         fast_analytics.grand_final_appearances
         == slow_analytics.grand_final_appearances
@@ -192,6 +194,16 @@ def top_analytics_tables(
             }
             for podium, count in analytics.exact_podiums.most_common(limit)
         ]),
+        "Complete Bracket Paths": pd.DataFrame([
+            {
+                "Path": " | ".join(
+                    f"{stage}={display_name(team)}"
+                    for stage, team in zip(COMPLETE_PATH_STAGES, path, strict=True)
+                ),
+                "Probability": count / n_iterations,
+            }
+            for path, count in analytics.complete_paths.most_common(limit)
+        ]),
         "Cinderella Grand Final Runs": pd.DataFrame([
             {"Team": display_name(team), "Probability": count / n_iterations}
             for team, count in cinderella.most_common(limit)
@@ -205,14 +217,14 @@ def analytics_metadata(
     champions = {team: values["Champion"] for team, values in counts.items()}
     cinderella = analytics.cinderella_runs(champions, n_iterations)
 
-    def serialize(counter: Counter, labeler) -> list[dict]:
+    def serialize(counter: Counter, labeler, limit: int | None = None) -> list[dict]:
         return [
             {
                 "key": labeler(key),
                 "count": int(count),
                 "probability": count / n_iterations,
             }
-            for key, count in counter.most_common()
+            for key, count in counter.most_common(limit)
         ]
 
     return {
@@ -224,6 +236,13 @@ def analytics_metadata(
         "exact_podiums": serialize(
             analytics.exact_podiums,
             lambda podium: "__then__".join(map(str, podium)),
+        ),
+        "complete_path_schema": list(COMPLETE_PATH_STAGES),
+        "complete_bracket_path_unique_count": len(analytics.complete_paths),
+        "complete_bracket_paths": serialize(
+            analytics.complete_paths,
+            lambda path: "__then__".join(map(str, path)),
+            limit=3,
         ),
         "cinderella_definition": "P(Champion) < 0.10 in this run",
         "cinderella_grand_final_runs": serialize(cinderella, str),
@@ -288,6 +307,11 @@ def main() -> dict:
         ),
         "Exact Podium": max_probability_difference(
             analytics_42.exact_podiums, analytics_99.exact_podiums, N_ITERATIONS
+        ),
+        "Complete Bracket Path": max_probability_difference(
+            analytics_42.complete_paths,
+            analytics_99.complete_paths,
+            N_ITERATIONS,
         ),
         "Cinderella Grand Final": max_probability_difference(
             cinderella_42, cinderella_99, N_ITERATIONS
