@@ -1,5 +1,22 @@
 # Version 2.0 Architecture Plan
 
+> **Status: implemented, with evidence-driven changes.** This file is the original design record, so some sections intentionally describe hypotheses that were later rejected. The deployed architecture is documented in [ARCHITECTURE.md](ARCHITECTURE.md), final metrics in [RESULTS.md](RESULTS.md), and accepted/rejected decisions in [V2_POST_MORTEM.md](V2_POST_MORTEM.md).
+
+## Locked implementation outcomes
+
+| Design question | Production decision |
+|---|---|
+| Team inactivity decay | 180-day half-life |
+| Player inactivity decay | 1,095-day half-life |
+| Within-map performance adjustment | Rejected; `K_PERF = 0` |
+| Player aggregation | Mean of the active five |
+| Hand-engineered blend | Lost to the learned two-feature comparison |
+| Production model | Untuned Approach B: separate `BaseElo_diff` and scaled `PlayerAggElo_diff` plus seven reliability/context features |
+| Optuna candidate | Rejected because the paired bootstrap CI crossed zero |
+| Calibration | Isotonic, fitted on Validation only |
+
+Sections below remain useful for understanding the hypotheses and safeguards, but this table and `ARCHITECTURE.md` describe what actually shipped.
+
 ## Objective
 
 Version 2.0 will extend the leakage-safe canonical Elo system with player-level micro-analytics and explicit time decay. This document is an implementation plan, not a finalized modeling specification. Every feature must be computable from information available before the predicted map begins.

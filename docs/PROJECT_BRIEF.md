@@ -1,8 +1,10 @@
 # CS2 AI Model — Project Brief
 
+> **Historical planning document.** This brief preserves the project's original V1 scope and data discoveries. It is not the current production specification. For the deployed V2 system, start with [Architecture](ARCHITECTURE.md), [Results](RESULTS.md), and the [documentation index](README.md).
+
 מסמך זה הוא מסמך הרקע (Context) של הפרויקט הספציפי הזה. הוא **משלים** את `Kaggle_AI_Agents_Playbook.md` (שמגדיר איך אנחנו עובדים — תפקידים, סטנדרטים, ה-Pipeline הכללי) ולא מחליף אותו. מטרת המסמך: כל סוכן/אדם שמצטרף לפרויקט, גם בלי היסטוריית השיחה, יבין תוך 5 דקות קריאה מה בונים, למה, ומה כבר ידוע על הדאטה.
 
-> **עדכון מצב — 16.09.2026:** מסמך זה משמר את נקודת הפתיחה והנחות התכנון. היישום הושלם והשתנה בעקבות הראיות: DNA, ‏H2H, ‏Rolling Form וכוונון Optuna לא עברו את מחקרי ההסרה, ולכן הארטיפקט הייצורי משתמש ב־Canonical Elo בלבד עם כיול איזוטוני. Test נמדד מול הארטיפקט שנפרס, ונבנו סימולטורים ל־Series, ‏Single Elimination ו־Double Elimination. התוצאות הסופיות נמצאות ב־`docs/RESULTS.md`, והסטטוס התפעולי ב־`WORK_PLAN.md`.
+> **עדכון מצב — 23.09.2026:** המסמך משמר את נקודת הפתיחה והנחות התכנון של V1. גרסה 2.0 הושלמה לאחר מכן ומוסיפה שכבת Player Elo מודעת־סגל, דעיכת זמן נפרדת לקבוצה ולשחקן, XGBoost וכיול איזוטוני. המפרט העדכני נמצא ב־`ARCHITECTURE.md`, התוצאות הקנוניות ב־`RESULTS.md`, והלקחים ב־`V2_POST_MORTEM.md`.
 
 ---
 
@@ -63,7 +65,7 @@
 
 **⚠️ עדיין פתוח:** `cs2_newestcombinedmatches_team1_reference_reduced.csv` ו-`_reduced2.csv` **לא** נכנסו ל-`data/` — עדיין לא הוכרע ביניהן (הערכים שונים בפועל, לא רק סדר עמודות). להכריע **לפני** שלב 9.
 
-**עדכון יישום:** לוגיקת הסינון, רשימת הפיצ'רים, הסימטריזציה והפיצ'רים היחסיים הועברה ל־`src/features.py`; מנוע Point-in-Time Elo נמצא ב־`src/features/elo.py`. סקריפטי הבנייה המקוריים נשמרו מחוץ ל־repository, אך הטבלאות הנגזרות וה־SHA של מקור המידול מתועדים תחת `data/`.
+**עדכון יישום:** לוגיקת הסינון, רשימת הפיצ'רים, הסימטריזציה והפיצ'רים היחסיים נמצאת ב־`src/features/tabular.py`; מנוע V1 Point-in-Time Elo נמצא ב־`src/features/elo.py`, ומנוע V2 מודע־השחקנים ב־`src/features/player_elo_state.py`. הטבלאות הנגזרות וה־SHA של ארטיפקטי המידול מתועדים תחת `data/` ו־`artifacts/`.
 
 ### קבצי המקור (15 קבצים, `Raw Data bases/`)
 מקור: Kaggle (griffindesroches ואחרים) + הורדות נוספות. ביקורת מלאה נשמרה בפרויקט Claude (`raw-data-audit-and-merge-plan.md`). תקציר:

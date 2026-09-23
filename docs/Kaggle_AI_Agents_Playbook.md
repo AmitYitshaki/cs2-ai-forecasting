@@ -38,7 +38,7 @@
 1.  **Setup & Git:** אתחול סביבה, טעינת הנתונים וקריאת מסמך זה.
 2.  **EDA & Cleaning:** ניתוח נתונים, טיפול בחריגים ובערכים חסרים.
 3.  **Baseline:** מודל פשוט ומהיר ליצירת `submission.csv` ראשון לוולידציה.
-4.  **Feature Engineering & OOP Refactoring:** המרת פיצ'רים טובים למחלקות ב-`src/features.py`.
+4.  **Feature Engineering & OOP Refactoring:** המרת פיצ'רים טובים למחלקות תחת `src/features/`.
 5.  **Modeling & Tuning:** אימון מודלים מורכבים וחיפוש היפר-פרמטרים.
 6.  **Ensembling & Final Submission:** שילוב מודלים למקסום ביצועים ויצירת הגשה סופית.
 

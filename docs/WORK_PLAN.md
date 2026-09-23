@@ -1,6 +1,8 @@
 # CS2 AI Model — Work Plan
 
-18 שלבים, כל אחד תוצר קונקרטי שמזין ישירות את הבא. תואם למבנה 6 השלבים של `Kaggle_AI_Agents_Playbook.md` (מצוין ליד כל שלב). עדכנו סטטוס (`[ ]` → `[x]`) תוך כדי עבודה — המסמך הזה הוא ה-source of truth להיכן אנחנו נמצאים.
+> **Historical execution log.** This checklist documents how V1 was built and should not be read as the current project status. Version 2.0 is complete; see [Architecture](ARCHITECTURE.md), [Results](RESULTS.md), and [Reproducibility](REPRODUCIBILITY.md). Checked items below are retained as an engineering audit trail.
+
+18 שלבים, כל אחד תוצר קונקרטי שמזין ישירות את הבא. תואם למבנה 6 השלבים של `Kaggle_AI_Agents_Playbook.md` (מצוין ליד כל שלב). הסימונים משקפים את מצב תוכנית V1 בזמן הביצוע; מקור האמת הנוכחי הוא `RESULTS.md`.
 
 > **סטטוס עדכני — 16.09.2026:** שלבים 1–17 הושלמו. המודל הייצורי שנבחר הוא Canonical Elo בלבד עם XGBoost וכיול איזוטוני. Test נפתח פעם אחת עבור הארטיפקט שנפרס, בוצעו backtest לקלן ותחזית חיה ל־StarLadder, כולל שתי ריצות של מיליון טורנירים. שלב 18 יושלם רק לאחר סיום האירוע והשוואת התחזית לתוצאות האמת. המספרים המאומתים נמצאים ב־`docs/RESULTS.md`.
 
@@ -25,7 +27,7 @@
 ### Playbook Stage 2: EDA & Cleaning
 
 - [x] **3. פורטינג ה-Feature Factory למודולים**
-  העברת הלוגיקה מ-`build_team_dna_features.py` ו-`build_final_tournament_features.py` ל-`src/features.py` כ-classes (לפי סטנדרט OOP של ה-Playbook — למשל `TeamDNABuilder`, `TournamentFeatureJoiner`). המחברת קוראת להן, לא כוללת את הלוגיקה inline.
+  העברת הלוגיקה מ-`build_team_dna_features.py` ו-`build_final_tournament_features.py` למודול tabular. המיקום הסופי לאחר ניקוי המבנה הוא `src/features/tabular.py`. המחברת קוראת למחלקות, ולא כוללת את הלוגיקה inline.
   **מייצר:** pipeline משוחזר (reproducible) מדאטה גולמי, לא רק קובץ CSV סטטי שקיבלנו.
 
 - [x] **4. EDA מלא**
@@ -38,7 +40,7 @@
 *(שלב 3 של ה-Playbook — Baseline — יבוא רק אחרי שיש Train/Val/Test נעולים, ראו שלב 6-7 למטה)*
 
 - [x] **5. Symmetrization + Diff Features**
-  ב-`src/features.py`: הכפלת כל שורה עם team1↔team2 מוחלפים ותווית הפוכה. בניית גרסת diff-features (`team1_stat - team2_stat`) כאלטרנטיבה לבדיקה מול הפיצ'רים הדו-צדדיים הגולמיים.
+  ב-`src/features/tabular.py`: הכפלת כל שורה עם team1↔team2 מוחלפים ותווית הפוכה. בניית גרסת diff-features (`team1_stat - team2_stat`) כאלטרנטיבה לבדיקה מול הפיצ'רים הדו-צדדיים הגולמיים.
   **מייצר:** שתי גרסאות פיצ'רים מוכנות להשוואה במודל.
 
 - [x] **6. נעילת ה-Chronological Split**

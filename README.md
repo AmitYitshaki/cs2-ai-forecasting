@@ -1,8 +1,24 @@
 # CS2 Dynamic Hybrid Elo Tournament Forecaster
 
+[![Python tests](https://github.com/AmitYitshaki/cs2-ai-forecasting/actions/workflows/python-tests.yml/badge.svg?branch=main)](https://github.com/AmitYitshaki/cs2-ai-forecasting/actions/workflows/python-tests.yml)
+![Python](https://img.shields.io/badge/Python-3.12-3776AB?logo=python&logoColor=white)
+![Status](https://img.shields.io/badge/status-V2.0%20complete-2ea44f)
+
 **Can a model forecast an entire professional Counter-Strike 2 tournament without seeing the future?** This project replays every historical map point-in-time, combines organization-level and player-level Elo, calibrates an XGBoost map classifier, and simulates complete Bo3/Bo5 double-elimination brackets millions of times.
 
 Version 2.0 is a portfolio-grade, leakage-controlled forecasting system: reproducible inputs, explicit temporal boundaries, validation-only model decisions, a one-shot locked Test evaluation, fast NumPy inference, and atomic result exports with provenance hashes.
+
+> **Project status:** Version 2.0 is complete. The locked model, one-shot Test metrics, dual-seed StarLadder backtest, and reproducibility artifacts are committed to this repository.
+
+## Start here
+
+| If you want to... | Read |
+|---|---|
+| Understand the project in five minutes | [V2 Executive Summary](docs/V2_EXECUTIVE_SUMMARY.md) |
+| See how data becomes a tournament forecast | [Current Architecture](docs/ARCHITECTURE.md) |
+| Inspect the canonical numbers | [Results](docs/RESULTS.md) |
+| Reproduce tests, artifacts, or simulations | [Reproducibility Guide](docs/REPRODUCIBILITY.md) |
+| Navigate every document | [Documentation Index](docs/README.md) |
 
 ## Why Version 2.0 exists
 
@@ -189,8 +205,12 @@ The current suite contains **15 tests** covering filtering, chronology, replay p
 
 ## Further reading
 
+- [`docs/README.md`](docs/README.md) — documentation map and source-of-truth hierarchy
+- [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) — concise description of the deployed V2 system
+- [`docs/REPRODUCIBILITY.md`](docs/REPRODUCIBILITY.md) — safe reproduction paths, from unit tests to full simulation
 - [`docs/V2_ARCHITECTURE_PLAN.md`](docs/V2_ARCHITECTURE_PLAN.md) — mathematical design and leakage constraints
 - [`docs/V2_EXECUTIVE_SUMMARY.md`](docs/V2_EXECUTIVE_SUMMARY.md) — the V2 story and real-world validation
 - [`docs/V2_POST_MORTEM.md`](docs/V2_POST_MORTEM.md) — accepted and rejected hypotheses
 - [`docs/RESULTS.md`](docs/RESULTS.md) — canonical metrics and simulation tables
 - [`docs/PROJECT_BRIEF.md`](docs/PROJECT_BRIEF.md) — original project scope and data notes
+- [`CONTRIBUTING.md`](CONTRIBUTING.md) — development and review expectations

@@ -39,5 +39,8 @@ jobs:
       - name: Compile Python sources
         run: python -m compileall .
 
+      - name: Check local Markdown links
+        run: python scripts/check_markdown_links.py
+
       - name: Check whitespace errors
         run: git diff --check

@@ -1,4 +1,23 @@
-# תוצאות הפרויקט — תמונת מצב סופית
+# Project Results
+
+> **Canonical record, updated 23 September 2026.** Version 2.0 is the deployed system. The earlier Hebrew section is retained as the complete V1 historical record; the V2 tables later in this document are the current production results.
+
+## Executive summary
+
+| Evaluation | Accuracy | Log-loss | Brier score |
+|---|---:|---:|---:|
+| V1 locked Test | 0.666387 | 0.646857 | 0.214199 |
+| **V2 Dynamic Hybrid locked Test** | **0.680672** | **0.609913** | **0.209964** |
+
+The production model is the untuned, learned-blend XGBoost candidate. Optuna was rejected because its paired match-cluster bootstrap interval crossed zero. The StarLadder Barcelona backtest used an exclusive `2026-09-17T00:00:00` cutoff and one million tournament paths per seed. Vitality ranked first at `38.4921%` title probability; Aurora's Cinderella Grand Final reach probability was `21.9347%`.
+
+For system design and reproduction instructions, see [ARCHITECTURE.md](ARCHITECTURE.md) and [REPRODUCIBILITY.md](REPRODUCIBILITY.md).
+
+---
+
+## Version 1.0 historical record — Hebrew
+
+### תוצאות הפרויקט — תמונת מצב סופית
 
 עודכן: 16 בספטמבר 2026.
 
