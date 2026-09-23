@@ -1,0 +1,552 @@
+{
+  "schema_version": "2.0.0-resolution-gate",
+  "as_of_date_exclusive": "2026-09-17T00:00:00",
+  "replayed_rows": 6700,
+  "last_replayed_timestamp": "2026-06-21T18:00:00",
+  "replay_parity_max_absolute_difference": 0.0,
+  "team_half_life_days": 180.0,
+  "player_half_life_days": 1095.0,
+  "k_perf": 0.0,
+  "calibrated_artifact": "artifacts/map_classifier/v2_dynamic_hybrid_isotonic.joblib",
+  "calibrated_artifact_sha256": "a3ab81428571b5147cf944fd14fd7c1aba9e0abbb5b56bf4db12e64a23ebcfd0",
+  "feature_columns": [
+    "BaseElo_diff",
+    "PlayerAggElo_diff_scaled",
+    "team1_gap_days",
+    "team2_gap_days",
+    "player_elo_std_A_scaled",
+    "player_elo_std_B_scaled",
+    "lineup_prior_maps_diff",
+    "team1_player_cold_starts",
+    "team2_player_cold_starts"
+  ],
+  "teams": [
+    {
+      "input_name": "MOUZ",
+      "normalized_name": "mouz",
+      "canonical_key": "mouz",
+      "n_games": 441,
+      "last_seen": "2026-06-14T15:00:00",
+      "cold_start": false
+    },
+    {
+      "input_name": "Vitality",
+      "normalized_name": "vitality",
+      "canonical_key": "vitality",
+      "n_games": 439,
+      "last_seen": "2026-06-19T22:25:00",
+      "cold_start": false
+    },
+    {
+      "input_name": "Natus Vincere",
+      "normalized_name": "natusvincere",
+      "canonical_key": "natus vincere",
+      "n_games": 428,
+      "last_seen": "2026-06-15T20:00:00",
+      "cold_start": false
+    },
+    {
+      "input_name": "FURIA",
+      "normalized_name": "furia",
+      "canonical_key": "furia",
+      "n_games": 454,
+      "last_seen": "2026-06-21T18:00:00",
+      "cold_start": false
+    },
+    {
+      "input_name": "Aurora",
+      "normalized_name": "aurora",
+      "canonical_key": "aurora",
+      "n_games": 304,
+      "last_seen": "2026-06-20T16:45:00",
+      "cold_start": false
+    },
+    {
+      "input_name": "magic",
+      "normalized_name": "magic",
+      "canonical_key": "magic",
+      "n_games": 23,
+      "last_seen": "2026-05-17T11:00:00",
+      "cold_start": false
+    },
+    {
+      "input_name": "MIBR",
+      "normalized_name": "mibr",
+      "canonical_key": "mibr",
+      "n_games": 232,
+      "last_seen": "2026-06-08T15:00:00",
+      "cold_start": false
+    },
+    {
+      "input_name": "NRG",
+      "normalized_name": "nrg",
+      "canonical_key": "nrg",
+      "n_games": 103,
+      "last_seen": "2026-06-05T20:00:00",
+      "cold_start": false
+    }
+  ],
+  "players": [
+    {
+      "team": "MOUZ",
+      "slot": 1,
+      "input_name": "torzsi",
+      "normalized_name": "torzsi",
+      "canonical_key": "id:2126",
+      "n_games": 441,
+      "last_seen": "2026-06-14T15:00:00",
+      "cold_start": false
+    },
+    {
+      "team": "MOUZ",
+      "slot": 2,
+      "input_name": "Spinx",
+      "normalized_name": "spinx",
+      "canonical_key": "id:3060",
+      "n_games": 420,
+      "last_seen": "2026-06-14T15:00:00",
+      "cold_start": false
+    },
+    {
+      "team": "MOUZ",
+      "slot": 3,
+      "input_name": "xertioN",
+      "normalized_name": "xertion",
+      "canonical_key": "id:3121",
+      "n_games": 441,
+      "last_seen": "2026-06-14T15:00:00",
+      "cold_start": false
+    },
+    {
+      "team": "MOUZ",
+      "slot": 4,
+      "input_name": "PR",
+      "normalized_name": "pr",
+      "canonical_key": "id:6284",
+      "n_games": 208,
+      "last_seen": "2026-06-07T18:20:00",
+      "cold_start": false
+    },
+    {
+      "team": "MOUZ",
+      "slot": 5,
+      "input_name": "xelex",
+      "normalized_name": "xelex",
+      "canonical_key": "id:26888",
+      "n_games": 44,
+      "last_seen": "2026-06-14T15:00:00",
+      "cold_start": false
+    },
+    {
+      "team": "Vitality",
+      "slot": 1,
+      "input_name": "apEX",
+      "normalized_name": "apex",
+      "canonical_key": "id:19",
+      "n_games": 439,
+      "last_seen": "2026-06-19T22:25:00",
+      "cold_start": false
+    },
+    {
+      "team": "Vitality",
+      "slot": 2,
+      "input_name": "ropz",
+      "normalized_name": "ropz",
+      "canonical_key": "id:146",
+      "n_games": 503,
+      "last_seen": "2026-06-19T22:25:00",
+      "cold_start": false
+    },
+    {
+      "team": "Vitality",
+      "slot": 3,
+      "input_name": "ZywOo",
+      "normalized_name": "zywoo",
+      "canonical_key": "id:550",
+      "n_games": 439,
+      "last_seen": "2026-06-19T22:25:00",
+      "cold_start": false
+    },
+    {
+      "team": "Vitality",
+      "slot": 4,
+      "input_name": "flameZ",
+      "normalized_name": "flamez",
+      "canonical_key": "id:1549",
+      "n_games": 439,
+      "last_seen": "2026-06-19T22:25:00",
+      "cold_start": false
+    },
+    {
+      "team": "Vitality",
+      "slot": 5,
+      "input_name": "mezii",
+      "normalized_name": "mezii",
+      "canonical_key": "id:1443",
+      "n_games": 437,
+      "last_seen": "2026-06-19T22:25:00",
+      "cold_start": false
+    },
+    {
+      "team": "Natus Vincere",
+      "slot": 1,
+      "input_name": "Aleksib",
+      "normalized_name": "aleksib",
+      "canonical_key": "id:169",
+      "n_games": 428,
+      "last_seen": "2026-06-15T20:00:00",
+      "cold_start": false
+    },
+    {
+      "team": "Natus Vincere",
+      "slot": 2,
+      "input_name": "iM",
+      "normalized_name": "im",
+      "canonical_key": "id:1834",
+      "n_games": 428,
+      "last_seen": "2026-06-15T20:00:00",
+      "cold_start": false
+    },
+    {
+      "team": "Natus Vincere",
+      "slot": 3,
+      "input_name": "b1t",
+      "normalized_name": "b1t",
+      "canonical_key": "id:1401",
+      "n_games": 428,
+      "last_seen": "2026-06-15T20:00:00",
+      "cold_start": false
+    },
+    {
+      "team": "Natus Vincere",
+      "slot": 4,
+      "input_name": "w0nderful",
+      "normalized_name": "w0nderful",
+      "canonical_key": "id:2934",
+      "n_games": 428,
+      "last_seen": "2026-06-15T20:00:00",
+      "cold_start": false
+    },
+    {
+      "team": "Natus Vincere",
+      "slot": 5,
+      "input_name": "makazze",
+      "normalized_name": "makazze",
+      "canonical_key": "id:7201",
+      "n_games": 196,
+      "last_seen": "2026-06-15T20:00:00",
+      "cold_start": false
+    },
+    {
+      "team": "FURIA",
+      "slot": 1,
+      "input_name": "FalleN",
+      "normalized_name": "fallen",
+      "canonical_key": "id:1",
+      "n_games": 454,
+      "last_seen": "2026-06-21T18:00:00",
+      "cold_start": false
+    },
+    {
+      "team": "FURIA",
+      "slot": 2,
+      "input_name": "yuurih",
+      "normalized_name": "yuurih",
+      "canonical_key": "id:625",
+      "n_games": 454,
+      "last_seen": "2026-06-21T18:00:00",
+      "cold_start": false
+    },
+    {
+      "team": "FURIA",
+      "slot": 3,
+      "input_name": "YEKINDAR",
+      "normalized_name": "yekindar",
+      "canonical_key": "id:564",
+      "n_games": 398,
+      "last_seen": "2026-06-21T18:00:00",
+      "cold_start": false
+    },
+    {
+      "team": "FURIA",
+      "slot": 4,
+      "input_name": "KSCERATO",
+      "normalized_name": "kscerato",
+      "canonical_key": "id:628",
+      "n_games": 454,
+      "last_seen": "2026-06-21T18:00:00",
+      "cold_start": false
+    },
+    {
+      "team": "FURIA",
+      "slot": 5,
+      "input_name": "molodoy",
+      "normalized_name": "molodoy",
+      "canonical_key": "id:26759",
+      "n_games": 268,
+      "last_seen": "2026-06-21T18:00:00",
+      "cold_start": false
+    },
+    {
+      "team": "Aurora",
+      "slot": 1,
+      "input_name": "XANTARES",
+      "normalized_name": "xantares",
+      "canonical_key": "id:156",
+      "n_games": 397,
+      "last_seen": "2026-06-20T16:45:00",
+      "cold_start": false
+    },
+    {
+      "team": "Aurora",
+      "slot": 2,
+      "input_name": "woxic",
+      "normalized_name": "woxic",
+      "canonical_key": "id:197",
+      "n_games": 403,
+      "last_seen": "2026-06-20T16:45:00",
+      "cold_start": false
+    },
+    {
+      "team": "Aurora",
+      "slot": 3,
+      "input_name": "Jimpphat",
+      "normalized_name": "jimpphat",
+      "canonical_key": "id:2200",
+      "n_games": 400,
+      "last_seen": "2026-04-17T18:00:00",
+      "cold_start": false
+    },
+    {
+      "team": "Aurora",
+      "slot": 4,
+      "input_name": "kyxsan",
+      "normalized_name": "kyxsan",
+      "canonical_key": "id:2611",
+      "n_games": 441,
+      "last_seen": "2026-04-19T16:30:00",
+      "cold_start": false
+    },
+    {
+      "team": "Aurora",
+      "slot": 5,
+      "input_name": "Wicadia",
+      "normalized_name": "wicadia",
+      "canonical_key": "id:4903",
+      "n_games": 403,
+      "last_seen": "2026-06-20T16:45:00",
+      "cold_start": false
+    },
+    {
+      "team": "magic",
+      "slot": 1,
+      "input_name": "MaSvAl",
+      "normalized_name": "masval",
+      "canonical_key": "id:5276",
+      "n_games": 23,
+      "last_seen": "2026-05-17T11:00:00",
+      "cold_start": false
+    },
+    {
+      "team": "magic",
+      "slot": 2,
+      "input_name": "sFade8",
+      "normalized_name": "sfade8",
+      "canonical_key": "id:4922",
+      "n_games": 35,
+      "last_seen": "2026-05-17T11:00:00",
+      "cold_start": false
+    },
+    {
+      "team": "magic",
+      "slot": 3,
+      "input_name": "AW",
+      "normalized_name": "aw",
+      "canonical_key": "id:4923",
+      "n_games": 65,
+      "last_seen": "2026-05-17T11:00:00",
+      "cold_start": false
+    },
+    {
+      "team": "magic",
+      "slot": 4,
+      "input_name": "mo0N",
+      "normalized_name": "mo0n",
+      "canonical_key": "id:25998",
+      "n_games": 36,
+      "last_seen": "2026-05-17T11:00:00",
+      "cold_start": false
+    },
+    {
+      "team": "magic",
+      "slot": 5,
+      "input_name": "tenzy",
+      "normalized_name": "tenzy",
+      "canonical_key": "id:26432",
+      "n_games": 23,
+      "last_seen": "2026-05-17T11:00:00",
+      "cold_start": false
+    },
+    {
+      "team": "MIBR",
+      "slot": 1,
+      "input_name": "LNZ",
+      "normalized_name": "lnz",
+      "canonical_key": "id:1451",
+      "n_games": 185,
+      "last_seen": "2026-06-08T15:00:00",
+      "cold_start": false
+    },
+    {
+      "team": "MIBR",
+      "slot": 2,
+      "input_name": "nqz",
+      "normalized_name": "nqz",
+      "canonical_key": "id:1871",
+      "n_games": 304,
+      "last_seen": "2026-03-09T20:30:00",
+      "cold_start": false
+    },
+    {
+      "team": "MIBR",
+      "slot": 3,
+      "input_name": "insani",
+      "normalized_name": "insani",
+      "canonical_key": "id:4574",
+      "n_games": 232,
+      "last_seen": "2026-06-08T15:00:00",
+      "cold_start": false
+    },
+    {
+      "team": "MIBR",
+      "slot": 4,
+      "input_name": "venomzera",
+      "normalized_name": "venomzera",
+      "canonical_key": "id:5028",
+      "n_games": 87,
+      "last_seen": "2026-06-08T15:00:00",
+      "cold_start": false
+    },
+    {
+      "team": "MIBR",
+      "slot": 5,
+      "input_name": "tomaszin",
+      "normalized_name": "tomaszin",
+      "canonical_key": "id:5875",
+      "n_games": 43,
+      "last_seen": "2025-04-18T01:00:00",
+      "cold_start": false
+    },
+    {
+      "team": "NRG",
+      "slot": 1,
+      "input_name": "nitr0",
+      "normalized_name": "nitr0",
+      "canonical_key": "id:31",
+      "n_games": 84,
+      "last_seen": "2026-06-05T20:00:00",
+      "cold_start": false
+    },
+    {
+      "team": "NRG",
+      "slot": 2,
+      "input_name": "Sonic",
+      "normalized_name": "sonic",
+      "canonical_key": "id:530",
+      "n_games": 141,
+      "last_seen": "2026-06-05T20:00:00",
+      "cold_start": false
+    },
+    {
+      "team": "NRG",
+      "slot": 3,
+      "input_name": "hallzerk",
+      "normalized_name": "hallzerk",
+      "canonical_key": "id:540",
+      "n_games": 232,
+      "last_seen": "2026-05-13T01:05:00",
+      "cold_start": false
+    },
+    {
+      "team": "NRG",
+      "slot": 4,
+      "input_name": "Grim",
+      "normalized_name": "grim",
+      "canonical_key": "id:472",
+      "n_games": 271,
+      "last_seen": "2026-06-05T20:00:00",
+      "cold_start": false
+    },
+    {
+      "team": "NRG",
+      "slot": 5,
+      "input_name": "jeorgesnorts",
+      "normalized_name": "jeorgesnorts",
+      "canonical_key": "id:3274",
+      "n_games": 86,
+      "last_seen": "2026-04-06T17:50:00",
+      "cold_start": false
+    }
+  ],
+  "opening_matchup_diagnostics": [
+    {
+      "team1": "MOUZ",
+      "team2": "NRG",
+      "calibrated_team1_win_probability": 0.8070206642150879,
+      "BaseElo_diff": 157.57658357916353,
+      "PlayerAggElo_diff_scaled": 197.1302408275279,
+      "team1_gap_days": 94.375,
+      "team2_gap_days": 103.16666666666667,
+      "player_elo_std_A_scaled": 96.49244272992476,
+      "player_elo_std_B_scaled": 40.71191888980187,
+      "lineup_prior_maps_diff": 0.0,
+      "team1_player_cold_starts": 0.0,
+      "team2_player_cold_starts": 0.0
+    },
+    {
+      "team1": "Vitality",
+      "team2": "magic",
+      "calibrated_team1_win_probability": 0.7037037014961243,
+      "BaseElo_diff": 113.45493596819665,
+      "PlayerAggElo_diff_scaled": 315.6774334840963,
+      "team1_gap_days": 89.06597222222223,
+      "team2_gap_days": 122.54166666666667,
+      "player_elo_std_A_scaled": 7.48125839166214,
+      "player_elo_std_B_scaled": 5.798522813025537,
+      "lineup_prior_maps_diff": 260.0,
+      "team1_player_cold_starts": 0.0,
+      "team2_player_cold_starts": 0.0
+    },
+    {
+      "team1": "Natus Vincere",
+      "team2": "Aurora",
+      "calibrated_team1_win_probability": 0.5583333373069763,
+      "BaseElo_diff": 20.613833597015173,
+      "PlayerAggElo_diff_scaled": -42.63234163842694,
+      "team1_gap_days": 93.16666666666667,
+      "team2_gap_days": 88.30208333333333,
+      "player_elo_std_A_scaled": 38.18975248897004,
+      "player_elo_std_B_scaled": 24.84973428695957,
+      "lineup_prior_maps_diff": 186.0,
+      "team1_player_cold_starts": 0.0,
+      "team2_player_cold_starts": 0.0
+    },
+    {
+      "team1": "FURIA",
+      "team2": "MIBR",
+      "calibrated_team1_win_probability": 0.7037037014961243,
+      "BaseElo_diff": 91.40180969936114,
+      "PlayerAggElo_diff_scaled": 162.88728624542568,
+      "team1_gap_days": 87.25,
+      "team2_gap_days": 100.375,
+      "player_elo_std_A_scaled": 22.578206912518556,
+      "player_elo_std_B_scaled": 17.377867167776373,
+      "lineup_prior_maps_diff": 256.0,
+      "team1_player_cold_starts": 0.0,
+      "team2_player_cold_starts": 0.0
+    }
+  ],
+  "cold_start_player_count": 0,
+  "confirmed_result_loaded": false,
+  "simulation_run": false
+}

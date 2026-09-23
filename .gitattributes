@@ -6,3 +6,4 @@
 *.csv text eol=lf
 *.ipynb text eol=lf
 *.joblib binary
+*.parquet binary

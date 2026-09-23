@@ -1,0 +1,68 @@
+{
+  "schema_version": "2.0.0",
+  "created_utc": "2026-09-17T15:43:48.050009+00:00",
+  "artifact": "artifacts/map_classifier/v2_dynamic_hybrid_xgboost.joblib",
+  "sha256": "e3628145a51f831842556e2c68c709a685524b332ca6bcfebf4169f23bd73bbb",
+  "test_policy": "single predict_proba call on 595 locked natural-order rows",
+  "no_decay_boundary_probe": {
+    "validation_log_loss": 0.657832757060,
+    "validation_correlation": 0.234450502519,
+    "train_fitted_scale": 2.377729383346,
+    "reference_1095_day_log_loss": 0.657035980293,
+    "selected_1095_day_result_remains_preferable": true,
+    "test_rows_loaded": 0
+  },
+  "test_metrics": {
+    "rows": 595,
+    "log_loss": 0.6099132299423218,
+    "accuracy": 0.680672268907563,
+    "brier": 0.2099635750055313,
+    "map_1": {
+      "rows": 294,
+      "matches": 294,
+      "log_loss": 0.6332699060440063,
+      "accuracy": 0.6156462585034014,
+      "brier": 0.22119444608688354,
+      "log_loss_ci95": [
+        0.6077371835708618,
+        0.6580557346343994
+      ],
+      "accuracy_ci95": [
+        0.5578231292517006,
+        0.673469387755102
+      ],
+      "brier_ci95": [
+        0.20916190892457961,
+        0.2331048771739006
+      ]
+    },
+    "map_2_plus": {
+      "rows": 301,
+      "matches": 219,
+      "log_loss": 0.5870997309684753,
+      "accuracy": 0.7441860465116279,
+      "brier": 0.19899392127990723,
+      "log_loss_ci95": [
+        0.5569893583655358,
+        0.6183931410312653
+      ],
+      "accuracy_ci95": [
+        0.6798679867986799,
+        0.8064542570068746
+      ],
+      "brier_ci95": [
+        0.18462982587516308,
+        0.21399531736969946
+      ]
+    },
+    "iem_cologne_2026_rows": 187,
+    "iem_cologne_2026": {
+      "log_loss": 0.6081091165542603,
+      "accuracy": 0.6898395721925134,
+      "brier": 0.20920386910438538
+    },
+    "falcons_furia_rows": 3,
+    "falcons_mean_map_probability": 0.6509152054786682,
+    "v1_falcons_series_reference": 0.7038
+  }
+}

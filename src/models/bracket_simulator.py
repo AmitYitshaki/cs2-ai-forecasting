@@ -133,6 +133,76 @@ class FastIsotonicXGBoostPredictor:
         )
 
 
+class FastNamedIsotonicXGBoostPredictor:
+    """Fast calibrated XGBoost inference with an explicit named feature contract."""
+
+    def __init__(
+        self,
+        booster: object,
+        x_thresholds: np.ndarray,
+        y_thresholds: np.ndarray,
+        feature_names: Sequence[str],
+    ) -> None:
+        self.booster = booster
+        self.x_thresholds = np.asarray(x_thresholds, dtype=float)
+        self.y_thresholds = np.asarray(y_thresholds, dtype=float)
+        self.feature_names = tuple(feature_names)
+
+    @classmethod
+    def from_calibrated_classifier(
+        cls,
+        calibrated_model: object,
+        expected_feature_names: Sequence[str],
+    ) -> "FastNamedIsotonicXGBoostPredictor":
+        calibrated_classifiers = getattr(
+            calibrated_model, "calibrated_classifiers_", None
+        )
+        if not calibrated_classifiers or len(calibrated_classifiers) != 1:
+            raise TypeError("Expected one prefit calibrated classifier.")
+        calibrated_classifier = calibrated_classifiers[0]
+        calibrators = getattr(calibrated_classifier, "calibrators", None)
+        if not calibrators or len(calibrators) != 1:
+            raise TypeError("Expected one binary isotonic calibrator.")
+        wrapped_estimator = calibrated_classifier.estimator
+        base_estimator = getattr(wrapped_estimator, "estimator", wrapped_estimator)
+        if not hasattr(base_estimator, "get_booster"):
+            raise TypeError("Expected an XGBoost estimator.")
+        calibrator = calibrators[0]
+        if not hasattr(calibrator, "X_thresholds_") or not hasattr(
+            calibrator, "y_thresholds_"
+        ):
+            raise TypeError("Expected a fitted isotonic calibrator.")
+        booster = base_estimator.get_booster()
+        expected = list(expected_feature_names)
+        assert booster.feature_names == expected, (
+            "Unsafe NumPy inference: booster feature order does not match the "
+            f"locked order. Expected {expected}, received {booster.feature_names}."
+        )
+        return cls(
+            booster,
+            calibrator.X_thresholds_,
+            calibrator.y_thresholds_,
+            expected,
+        )
+
+    def predict_numpy(self, features: np.ndarray) -> np.ndarray:
+        matrix = np.asarray(features, dtype=np.float32)
+        if matrix.ndim != 2 or matrix.shape[1] != len(self.feature_names):
+            raise ValueError(
+                f"Expected a two-dimensional {len(self.feature_names)}-feature matrix."
+            )
+        raw_probability = np.asarray(
+            self.booster.inplace_predict(matrix), dtype=float
+        )
+        return np.interp(
+            raw_probability,
+            self.x_thresholds,
+            self.y_thresholds,
+            left=self.y_thresholds[0],
+            right=self.y_thresholds[-1],
+        )
+
+
 @dataclass
 class TournamentEloState:
     """Mutable ratings owned by one simulated tournament path."""
@@ -190,6 +260,7 @@ class TournamentAnalytics:
     complete_paths: Counter[tuple[Hashable, ...]] = field(
         default_factory=Counter
     )
+    bracket_paths: Counter[str] = field(default_factory=Counter)
 
     def merge(self, other: "TournamentAnalytics") -> None:
         """Merge one independently simulated batch into this tracker."""
@@ -199,6 +270,7 @@ class TournamentAnalytics:
         self.exact_podiums.update(other.exact_podiums)
         self.grand_final_appearances.update(other.grand_final_appearances)
         self.complete_paths.update(other.complete_paths)
+        self.bracket_paths.update(other.bracket_paths)
 
     def cinderella_runs(
         self,
@@ -555,13 +627,15 @@ def _simulate_double_elimination_batch(
 
     _increment_counts(counts, upper_final_winner, "Final")
     _increment_counts(counts, consolidation_winner, "Final")
-    champions = _play_matchup_batch(
+    grand_final_winners = _play_matchup_batch(
         upper_final_winner, consolidation_winner, states, 5,
         active_map_pool, historical_map_orders, probability_model, rng,
     )
+    champions = grand_final_winners.copy()
+    reset_mask = np.zeros(n_paths, dtype=bool)
 
     if grand_final_reset:
-        reset_mask = champions == consolidation_winner
+        reset_mask = grand_final_winners == consolidation_winner
         reset_indices = np.flatnonzero(reset_mask)
         if reset_indices.size:
             reset_states = [states[index] for index in reset_indices]
@@ -610,6 +684,28 @@ def _simulate_double_elimination_batch(
         runner_ups,
         strict=True,
     ))
+    path_labels = (
+        "UB_QF1", "UB_QF2", "UB_QF3", "UB_QF4",
+        "UB_SF1", "UB_SF2", "UB_Final",
+        "LB_R1A", "LB_R1B", "LB_SF_A", "LB_SF_B",
+        "LB_R3", "LB_Final", "GrandFinal",
+    )
+    path_values = (
+        upper_qf_winners[0], upper_qf_winners[1],
+        upper_qf_winners[2], upper_qf_winners[3],
+        upper_sf_winners[0], upper_sf_winners[1], upper_final_winner,
+        lower_r1_winners[0], lower_r1_winners[1],
+        lower_sf_winners[0], lower_sf_winners[1],
+        lower_final_winner, consolidation_winner, grand_final_winners,
+    )
+    for path_index in range(n_paths):
+        key = "|".join(
+            f"{label}:{values[path_index]}"
+            for label, values in zip(path_labels, path_values, strict=True)
+        )
+        if reset_mask[path_index]:
+            key += f"|GrandFinalReset:{champions[path_index]}"
+        analytics.bracket_paths[key] += 1
     _increment_counts(counts, champions, "Champion")
     return counts, analytics
 
@@ -629,9 +725,16 @@ def _play_matchup_batch(
     orders = _resolve_map_orders(
         team_as, team_bs, best_of, active_map_pool, historical_map_orders, rng
     )
-    winners, _ = _simulate_series_batch(
-        team_as, team_bs, states, best_of, orders, probability_model, rng
-    )
+    if states and hasattr(states[0], "build_matchup_feature_dict") and hasattr(
+        states[0], "update_map"
+    ):
+        winners, _ = _simulate_named_feature_series_batch(
+            team_as, team_bs, states, best_of, probability_model, rng
+        )
+    else:
+        winners, _ = _simulate_series_batch(
+            team_as, team_bs, states, best_of, orders, probability_model, rng
+        )
     return winners
 
 
@@ -842,6 +945,63 @@ def _simulate_series_batch(
     return winners, scorelines
 
 
+def _simulate_named_feature_series_batch(
+    team_as: np.ndarray,
+    team_bs: np.ndarray,
+    states: list[object],
+    best_of: int,
+    probability_model: object,
+    rng: np.random.Generator,
+) -> tuple[np.ndarray, np.ndarray]:
+    """Simulate a series from states that own their named feature/update logic."""
+
+    n_paths = len(states)
+    if not (len(team_as) == len(team_bs) == n_paths):
+        raise ValueError("Batch inputs must have identical lengths.")
+    wins_needed = best_of // 2 + 1
+    wins_a = np.zeros(n_paths, dtype=np.int8)
+    wins_b = np.zeros(n_paths, dtype=np.int8)
+    active = np.ones(n_paths, dtype=bool)
+
+    for _ in range(best_of):
+        active_indices = np.flatnonzero(active)
+        if active_indices.size == 0:
+            break
+        feature_rows = []
+        for path_index in active_indices:
+            mapping = states[path_index].build_matchup_feature_dict(
+                team_as[path_index], team_bs[path_index]
+            )
+            feature_rows.append(tuple(mapping.values()))
+        matrix = np.asarray(feature_rows, dtype=np.float32)
+        probabilities = _predict_positive_numpy(probability_model, matrix)
+        if not np.isfinite(probabilities).all() or (
+            (probabilities < 0.0) | (probabilities > 1.0)
+        ).any():
+            raise ValueError("The calibrated model returned invalid probabilities.")
+        outcomes = rng.random(active_indices.size) < probabilities
+
+        for row_index, path_index in enumerate(active_indices):
+            outcome = bool(outcomes[row_index])
+            wins_a[path_index] += int(outcome)
+            wins_b[path_index] += int(not outcome)
+            states[path_index].update_map(
+                team_as[path_index], team_bs[path_index], outcome
+            )
+
+        completed = (wins_a >= wins_needed) | (wins_b >= wins_needed)
+        active &= ~completed
+
+    if active.any():
+        raise AssertionError("Some named-feature batched series did not finish.")
+    winners = np.where(wins_a == wins_needed, team_as, team_bs)
+    scorelines = np.asarray(
+        [f"{score_a}-{score_b}" for score_a, score_b in zip(wins_a, wins_b)],
+        dtype=object,
+    )
+    return winners, scorelines
+
+
 def _predict_positive_numpy(
     probability_model: object, features: np.ndarray
 ) -> np.ndarray:
@@ -1007,6 +1167,7 @@ def _assert_tournament_analytics(
     assert sum(analytics.exact_podiums.values()) == n_iterations
     assert sum(analytics.grand_final_appearances.values()) == 2 * n_iterations
     assert sum(analytics.complete_paths.values()) == n_iterations
+    assert sum(analytics.bracket_paths.values()) == n_iterations
     assert all(
         len(path) == len(COMPLETE_PATH_STAGES)
         for path in analytics.complete_paths

@@ -1,94 +1,140 @@
-# CS2 Tournament Simulator
+# CS2 Dynamic Hybrid Elo Tournament Forecaster
 
-A leakage-safe forecasting system for professional Counter-Strike 2 tournaments. The project combines a calibrated XGBoost map classifier with point-in-time Elo ratings and Monte Carlo simulation for Bo3/Bo5 series, single-elimination brackets, and eight-team double-elimination brackets.
+**Can a model forecast an entire professional Counter-Strike 2 tournament without seeing the future?** This project replays every historical map point-in-time, combines organization-level and player-level Elo, calibrates an XGBoost map classifier, and simulates complete Bo3/Bo5 double-elimination brackets millions of times.
 
-The repository is intentionally educational: Python identifiers remain conventional English, while every notebook explains the statistical reasoning and engineering decisions in paired English and Hebrew Markdown cells. English appears first for international readers, and the original Hebrew documentation is preserved.
+Version 2.0 is a portfolio-grade, leakage-controlled forecasting system: reproducible inputs, explicit temporal boundaries, validation-only model decisions, a one-shot locked Test evaluation, fast NumPy inference, and atomic result exports with provenance hashes.
 
-## What the system does
+## Why Version 2.0 exists
 
-1. Replays historical maps chronologically and records each team's global and per-map Elo **before** the current result is applied.
-2. Splits data strictly by time: Train through 2025-12-31, Validation in 2026 Q1, and the locked Test period from 2026-04-01 onward.
-3. Symmetrizes each split independently so the model cannot learn a source-order bias.
-4. Trains an XGBoost classifier on six canonical Elo features and fits isotonic calibration on Validation only.
-5. Simulates maps, series, and complete tournament brackets while carrying live Elo momentum through each simulated path.
-6. Exports timestamped, atomic result artifacts with the random seed, iteration count, runtime, configuration, schema version, and SHA-256 hash of the deployed model.
+Version 1.0 modeled only the team: global Elo, map-specific Elo, and their differences. That macro view was competitive, but it had a structural blind spot. When an organization changed its lineup, the model continued to value the team through results earned by players who might no longer be on the server.
 
-## Final model
+Version 2.0 adds the missing micro layer: persistent player ratings tied to the verified active five. The model now sees both the strength of the organization and the strength of the people representing it.
 
-The production classifier uses only:
+## Dynamic Hybrid Elo
 
-- `team1_elo_global`, `team2_elo_global`
-- `team1_elo_map`, `team2_elo_map`
-- `elo_global_diff`, `elo_map_diff`
-
-DNA, head-to-head history, rolling form, and Optuna tuning were each tested through controlled ablations. None cleared the fixed canonical-Elo baseline statistically, so they were deliberately excluded from production rather than stacked onto the model.
-
-The deployed artifact is `artifacts/map_classifier/canonical_elo_isotonic.joblib`. Its current SHA-256 is:
+The production pipeline replays valid maps in strict chronological order. Every feature is emitted **before** the current result updates state.
 
 ```text
-274a8118ada2c9551f7e668f8999fa0ff672b0158b6d055056a152f09820370d
+Historical maps
+    -> point-in-time replay
+    -> Macro Elo: team identity, 180-day half-life
+    -> Micro Elo: mean rating of the active five, 1,095-day half-life
+    -> variance matching fitted on Train only
+    -> nine named model features
+    -> fixed XGBoost classifier
+    -> isotonic calibration fitted on Validation only
+    -> Bo3/Bo5 series simulation
+    -> double-elimination Monte Carlo bracket
 ```
 
-## Locked Test result
+The two rating layers decay differently because they represent different things:
 
-Notebook 1.5 evaluates the exact calibrated artifact used by the simulator—not a separately retrained approximation.
+- **Team Elo half-life: 180 days.** Systems, coaching, roles, and lineup chemistry can become stale quickly.
+- **Player Elo half-life: 1,095 days.** Individual skill behaved as a much more persistent signal in the validation sweep.
+- **Player aggregation: mean of the active five.** A mean preserves the Elo scale; a sum would inflate it fivefold.
 
-| Metric | Overall Test | Map 1 | Map 2+ |
+The player update began with a centered performance term:
+
+```text
+player_delta = team_delta / 5 + K_PERF * relative_performance
+```
+
+After 400 validation-grid combinations, the winning value was **`K_PERF = 0`**. In this model, CS2 is about winning, not padding stats: map-level ADR/KAST/K-D adjustments added noise beyond the team result. That is an empirical project finding, not a universal claim that player statistics never matter.
+
+## Production feature contract
+
+The locked classifier consumes exactly nine features, reindexed by stored name before inference:
+
+1. `BaseElo_diff`
+2. `PlayerAggElo_diff_scaled`
+3. `team1_gap_days`
+4. `team2_gap_days`
+5. `player_elo_std_A_scaled`
+6. `player_elo_std_B_scaled`
+7. `lineup_prior_maps_diff`
+8. `team1_player_cold_starts`
+9. `team2_player_cold_starts`
+
+The deployed calibrated artifact is [`v2_dynamic_hybrid_isotonic.joblib`](artifacts/map_classifier/v2_dynamic_hybrid_isotonic.joblib). Its SHA-256 is:
+
+```text
+a3ab81428571b5147cf944fd14fd7c1aba9e0abbb5b56bf4db12e64a23ebcfd0
+```
+
+## Statistical discipline: the model we rejected
+
+A 75-trial Optuna search produced a slightly better validation point estimate than the fixed baseline. A paired, match-cluster bootstrap told a different story:
+
+```text
+95% CI for tuned-minus-untuned per-row log-loss: [-0.0042, +0.0005]
+```
+
+Because the interval crossed zero, the apparent gain could not be distinguished from sampling noise. The tuned model was rejected and the fixed, untuned learned-blend model was locked for Test. Hyperparameter search was treated as a hypothesis, not permission to publish the lowest number.
+
+## Locked Test results
+
+The Test partition contains 595 map rows from 2026 Q2 and was evaluated exactly once after all feature and model choices were locked.
+
+| Model | Accuracy | Log-loss | Brier score |
 |---|---:|---:|---:|
-| Accuracy | 0.666387 | 0.641156 | 0.691030 |
-| Brier score | 0.214199 | 0.222295 | 0.206291 |
-| Log-loss | 0.646857 | — | — |
+| V1 canonical team Elo | 66.64% | 0.6469 | 0.2142 |
+| **V2 Dynamic Hybrid Elo** | **68.07%** | **0.6099** | **0.2100** |
 
-Bootstrap confidence intervals are resampled by `match_id`, preserving dependence between maps from the same series and between mirrored rows.
+The full IEM Cologne 2026 slice contains 187 rows: 68.98% accuracy, 0.6081 log-loss, and 0.2092 Brier score.
 
-## StarLadder production forecast
+## StarLadder Barcelona: one million brackets per seed
 
-The final production run simulated StarLadder StarSeries Fall 2026 twice with **1,000,000 tournament paths per seed**.
+The retrospective StarLadder StarSeries Fall 2026 backtest used verified rosters for all 40 players and an exclusive information cutoff of **2026-09-17 00:00:00**. The actual result was inaccessible to feature construction and simulation, and was loaded only after both exported runs were locked.
 
-| Stability distribution | Maximum absolute seed difference |
+| Team | P(Champion), seed 42 |
 |---|---:|
-| Champion probability | 0.1275% |
-| Grand Final matchup | 0.0425% |
-| Runner-up | 0.0695% |
-| Exact podium | 0.0447% |
-| Complete bracket path | 0.0197% |
-| Cinderella Grand Final run | 0.0410% |
+| **Vitality** | **38.49%** |
+| FURIA | 20.37% |
+| Natus Vincere | 15.62% |
+| MOUZ | 10.73% |
+| Aurora | 9.46% |
+| magic | 3.82% |
+| MIBR | 1.44% |
+| NRG | 0.07% |
 
-All checks cleared the 0.5 percentage-point guardrail. Full-precision results, opening-series probabilities, and the most frequent complete bracket paths are stored under `results/starladder/`; see [docs/RESULTS.md](docs/RESULTS.md) for the concise report.
+Vitality was the model's clear favorite and won the tournament. Aurora began below the 10% title threshold, yet the simulator assigned it a **21.93% Cinderella probability of reaching the Grand Final**. Aurora did exactly that before losing to Vitality 3-1.
 
-## Notebook walkthrough
+Two independent runs of 1,000,000 complete brackets used seeds 42 and 99. The largest seed disagreement across tracked headline categories was **0.1319 percentage points**, comfortably inside the predeclared 0.5-point stability guardrail.
 
-| Notebook | Purpose |
-|---|---|
-| `1.0_setup_and_data_sanity.ipynb` | Environment verification, source-table sanity check, and the first anti-leakage allowlist |
-| `1.1_point_in_time_elo_pipeline.ipynb` | Point-in-time global/map Elo and the first Elo-only XGBoost ablation |
-| `1.2_xgboost_elo_h2h_dna_candidate.ipynb` | Rejected Elo + H2H + DNA candidate and why more features were not automatically better |
-| `1.3_canonical_elo_feature_ablation.ipynb` | Canonical identity fix and controlled DNA, H2H, and rolling-form ablations |
-| `1.4_optuna_statistical_guardrail.ipynb` | Optuna tuning and paired bootstrap guardrail against the fixed baseline |
-| `1.5_locked_test_artifact_evaluation.ipynb` | One-way locked Test evaluation of the deployed calibrated artifact |
-| `1.6_monte_carlo_fast_path_and_cologne.ipynb` | Fast NumPy inference, series simulation, and point-in-time Cologne playoff backtest |
-| `1.7_double_elimination_preproduction.ipynb` | 100k-path double-elimination pre-production run and atomic export |
-| `1.8_starladder_1m_production.ipynb` | Dual-seed million-path production run and rare-event analytics |
+Detailed probabilities, rare-event analytics, complete bracket paths, and provenance live in [`results/starladder/`](results/starladder/) and [`docs/RESULTS.md`](docs/RESULTS.md). Prior V1 simulations are preserved separately under [`results/archive/v1/`](results/archive/v1/).
 
-Every Hebrew explanation is preceded by an English companion cell. The notebooks are executed and retain their outputs so the reasoning and observed results can be reviewed without rerunning long simulations.
+## Leakage controls and reproducibility
 
-## Repository structure
+- Invalid map rows are removed with `map_name.notna() AND (is_total == False OR bestOf == 1)`, followed by `score1_game + score2_game > 0`.
+- Calendar splits are fixed: Train through 2025-12-31, Validation in 2026 Q1, and locked Test in 2026 Q2.
+- Stateful features are captured before updating on the current map.
+- Scaling is fitted on Train only; calibration is fitted on Validation only.
+- Test is excluded from feature selection, hyperparameter tuning, and calibration.
+- StarLadder replay enforces a hard exclusive pre-event timestamp.
+- All team and player identities must resolve; unintended cold starts block production.
+- The fast predictor asserts the exact stored feature order before NumPy inference.
+- Tournament state is isolated per Monte Carlo path.
+- Results use temporary files followed by atomic rename, with seed, runtime, schema version, and model SHA-256 recorded in metadata.
+
+## Repository guide
 
 ```text
-artifacts/                 deployed calibrated model bundle
-configs/                   configuration placeholders
-data/                      source and derived CS2 tables
-docs/                      project brief, work plan, review notes, results
-notebooks/                 chronological educational workflow
-results/starladder/        immutable timestamped production exports
-scripts/                   reproducible audits and production runners
-src/data/                  chronological split logic
-src/features/              point-in-time Elo/H2H/rolling-form engine
-src/models/                series, bracket, fast inference, and export logic
-tests/                     unit and pipeline tests
+artifacts/map_classifier/  locked raw and calibrated model bundles + metadata
+config/                    verified tournament rosters and bracket inputs
+data/                      source tables and derived point-in-time feature stores
+docs/                      architecture, decisions, results, and post-mortem
+notebooks/                 bilingual educational experiments and evaluations
+results/starladder/        final V2 million-path production exports
+results/archive/v1/        preserved V1 simulation runs
+scripts/                   reproducible builders, calibration, and production runners
+src/features/              point-in-time Elo and tabular feature engineering
+src/models/                calibrated inference, series/bracket simulation, exporters
+tests/                     15 automated tests for invariants and leakage controls
 ```
 
-## Setup
+The notebooks present English explanations first and preserve the original Hebrew teaching text immediately afterward.
+
+## Reproduce the project
 
 Python 3.12 is the verified environment.
 
@@ -99,38 +145,52 @@ python -m pip install -r requirements.txt
 python -m unittest discover -s tests -v
 ```
 
-To inspect the educational workflow:
+Key entry points:
 
 ```powershell
-jupyter lab
+# Build the V2 point-in-time feature store and educational notebook
+python scripts/build_v2_data_exploration_notebook.py
+
+# Rebuild the validation/tuning notebook
+python scripts/build_v2_xgboost_tuning_notebook.py
+
+# Fit validation-only isotonic calibration for the locked raw classifier
+python scripts/calibrate_v2_model.py
+
+# Run identity resolution, replay parity, and the small preflight only
+python scripts/v2_monte_carlo.py
+
+# Explicitly unlock the expensive dual-seed production simulation
+python scripts/v2_monte_carlo.py --run-full
 ```
 
-The million-iteration production run is intentionally expensive. For a smoke test, call the simulator with a much smaller `n_iterations` value rather than rerunning Notebook 1.8 unchanged.
+The last command runs two million complete tournament simulations in total. Existing immutable exports should be inspected before rerunning it.
 
-## Reproducibility and safety
+## Tech stack
 
-- The strict phantom-row filter is `map_name.notna() AND (is_total == False OR bestOf == 1)`, followed by `score1_game + score2_game > 0`.
-- Feature construction is chronological; a row is recorded before its outcome updates Elo.
-- Symmetrization occurs after the chronological split and independently within each period.
-- Test is never used for tuning or calibration.
-- The NumPy fast path asserts the exact Booster feature order before inference.
-- Tournament state is isolated per Monte Carlo path.
-- Result files are written through `.tmp` files and atomically renamed.
-- No API keys, passwords, access tokens, private keys, or local absolute paths are required or stored in the repository.
+- **Data:** pandas, NumPy, PyArrow
+- **Modeling:** XGBoost, scikit-learn isotonic calibration, Optuna
+- **Evaluation:** log-loss, Brier score, accuracy, match-cluster bootstrap confidence intervals
+- **Simulation:** NumPy fast path, pure-Python state threading, `tqdm` progress reporting
+- **Artifacts:** Joblib, JSON/CSV metadata, SHA-256 provenance, atomic writes
+- **Quality:** `unittest`, deterministic seeds, explicit runtime assertions
 
-## Data note
+The current suite contains **15 tests** covering filtering, chronology, replay parity, feature ordering, series behavior, single- and double-elimination invariants, analytics reconciliation, and artifact export.
 
-The tables under `data/` are derived from public competitive-CS2 datasets and project-specific cleaning/join steps. Their provenance and known limitations are documented in [docs/PROJECT_BRIEF.md](docs/PROJECT_BRIEF.md). Users are responsible for observing the terms of the original data sources when redistributing or reusing them.
+## Limitations
 
-## Known limitations
+- This is a retrospective research project, not betting or financial advice.
+- The StarLadder result validates one tournament backtest; it does not establish universal out-of-sample dominance.
+- Elo captures historical outcomes and identity continuity, not tactical matchups, travel, health, substitutions announced after the cutoff, or every roster-role interaction.
+- `K_PERF = 0` means the tested box-score adjustment failed here; richer genuinely point-in-time player data could still add value.
+- Unknown vetoes and map orders require assumptions, which introduce structural uncertainty.
+- Monte Carlo standard error measures simulation noise, not model misspecification or missing data.
+- The 1,095-day player decay was the locked validation choice, but the no-decay boundary probe was close and not independently bootstrapped.
 
-- Unknown vetoes are approximated by sampling maps uniformly without replacement from the active pool.
-- The model does not explicitly model roster changes, economy, travel, substitutions, or player-level availability.
-- Monte Carlo standard error measures simulation noise only; it does not capture model uncertainty or missing information.
-- The latest historical map in the StarLadder snapshot is dated 2026-06-21, so later roster/form information is absent.
+## Further reading
 
-## Verification
-
-The current suite contains 12 passing tests covering leakage-safe feature construction, chronological splitting, series simulation, single- and double-elimination invariants, analytics reconciliation, and atomic exports.
-
-For the detailed development history and statistical conclusions, follow the notebooks in numeric order and read [docs/RESULTS.md](docs/RESULTS.md).
+- [`docs/V2_ARCHITECTURE_PLAN.md`](docs/V2_ARCHITECTURE_PLAN.md) — mathematical design and leakage constraints
+- [`docs/V2_EXECUTIVE_SUMMARY.md`](docs/V2_EXECUTIVE_SUMMARY.md) — the V2 story and real-world validation
+- [`docs/V2_POST_MORTEM.md`](docs/V2_POST_MORTEM.md) — accepted and rejected hypotheses
+- [`docs/RESULTS.md`](docs/RESULTS.md) — canonical metrics and simulation tables
+- [`docs/PROJECT_BRIEF.md`](docs/PROJECT_BRIEF.md) — original project scope and data notes

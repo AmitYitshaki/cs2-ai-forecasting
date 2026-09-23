@@ -1,0 +1,33 @@
+{
+  "schema_version": "2.0.0",
+  "created_utc": "2026-09-22T07:22:31.405851+00:00",
+  "artifact": "artifacts/map_classifier/v2_dynamic_hybrid_isotonic.joblib",
+  "artifact_sha256": "a3ab81428571b5147cf944fd14fd7c1aba9e0abbb5b56bf4db12e64a23ebcfd0",
+  "source_artifact": "artifacts/map_classifier/v2_dynamic_hybrid_xgboost.joblib",
+  "source_artifact_sha256": "e3628145a51f831842556e2c68c709a685524b332ca6bcfebf4169f23bd73bbb",
+  "seed": 42,
+  "feature_columns": [
+    "BaseElo_diff",
+    "PlayerAggElo_diff_scaled",
+    "team1_gap_days",
+    "team2_gap_days",
+    "player_elo_std_A_scaled",
+    "player_elo_std_B_scaled",
+    "lineup_prior_maps_diff",
+    "team1_player_cold_starts",
+    "team2_player_cold_starts"
+  ],
+  "player_scale_factor": 2.7908753241263775,
+  "calibration_method": "isotonic",
+  "calibration_api": "sklearn.frozen.FrozenEstimator",
+  "calibration_split": "Validation only: 2026-01-01 through 2026-03-31",
+  "validation_rows_natural": 633,
+  "validation_rows_symmetrized": 1266,
+  "test_rows_loaded": 0,
+  "metrics": {
+    "raw_validation_log_loss": 0.6605474948883057,
+    "raw_validation_brier": 0.2343418300151825,
+    "calibrated_validation_log_loss": 0.6434619427491459,
+    "calibrated_validation_brier": 0.2280928096854172
+  }
+}

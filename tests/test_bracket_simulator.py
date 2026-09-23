@@ -131,11 +131,45 @@ class BracketSimulatorTests(unittest.TestCase):
         self.assertEqual(sum(analytics.runner_ups.values()), 200)
         self.assertEqual(sum(analytics.exact_podiums.values()), 200)
         self.assertEqual(sum(analytics.grand_final_appearances.values()), 400)
+        self.assertEqual(sum(analytics.bracket_paths.values()), 200)
+        self.assertTrue(
+            all(
+                path.startswith("UB_QF1:")
+                and "|LB_Final:" in path
+                and "|GrandFinal:" in path
+                and "|GrandFinalReset:" not in path
+                for path in analytics.bracket_paths
+            )
+        )
         for team in self.teams:
             self.assertEqual(
                 analytics.runner_ups[team] + results[team]["Champion"],
                 results[team]["Final"],
             )
+
+    def test_bracket_path_marks_only_actual_grand_final_resets(self) -> None:
+        opening_matchups = tuple(
+            (self.teams[index], self.teams[index + 1])
+            for index in range(0, 8, 2)
+        )
+        _, analytics = simulate_double_elimination_tournament(
+            opening_matchups,
+            self.state,
+            self.model,
+            self.maps,
+            n_iterations=200,
+            random_state=29,
+            grand_final_reset=True,
+            track_analytics=True,
+            show_progress=False,
+        )
+        reset_paths = sum(
+            count
+            for path, count in analytics.bracket_paths.items()
+            if "|GrandFinalReset:" in path
+        )
+        self.assertGreater(reset_paths, 0)
+        self.assertLess(reset_paths, 200)
 
 
 if __name__ == "__main__":

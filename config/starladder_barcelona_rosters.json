@@ -1,0 +1,68 @@
+{
+  "tournament": "StarLadder StarSeries Fall 2026",
+  "location": "Barcelona, Spain",
+  "event_dates": "2026-09-17 to 2026-09-20",
+  "as_of_date": "2026-09-17T00:00:00",
+  "purpose": "V2.0 Dynamic Hybrid Elo Monte Carlo backtest (event already concluded as of generation date)",
+  "generated_utc": "2026-09-22",
+  "roster_confidence_notice": "Team names verified via multiple cross-referenced sources (HLTV, independent tournament trackers). Player rosters were supplied directly by the project lead on 2026-09-22 and attested as verified; they were not independently re-confirmed against a primary source in this session (Liquipedia was unreachable via automated fetch). Treat roster_verified=true as the project lead's attestation, not an independent second-source check.",
+  "sources": [
+    "https://www.hltv.org/events/8057/starladder-starseries-fall-2026",
+    "https://www.hltv.org/news/45519/starladder-starseries-fall-teams-format-schedule-prizes-talent-fantasy",
+    "https://vitality.gg/blogs/presse/team-vitality-prend-sa-revanche-barcelone-et-remporte-le-starladder-starseries-fall-2026"
+  ],
+  "opening_matchups": [
+    ["MOUZ", "NRG"],
+    ["Vitality", "magic"],
+    ["Natus Vincere", "Aurora"],
+    ["FURIA", "MIBR"]
+  ],
+  "confirmed_result": {
+    "champion": "Vitality",
+    "runner_up": "Aurora",
+    "grand_final_score": "3-1",
+    "note": "Confirmed post-event via Vitality's own official announcement, cross-referenced against HLTV. Not used as model input — recorded here only so the eventual backtest report can compare the forecast against the real outcome."
+  },
+  "teams": {
+    "MOUZ": {
+      "entry_method": "direct invite",
+      "players": ["torzsi", "Spinx", "xertioN", "PR", "xelex"],
+      "roster_verified": true
+    },
+    "Vitality": {
+      "entry_method": "direct invite",
+      "players": ["apEX", "ropz", "ZywOo", "flameZ", "mezii"],
+      "roster_verified": true
+    },
+    "Natus Vincere": {
+      "entry_method": "direct invite",
+      "players": ["Aleksib", "iM", "b1t", "w0nderful", "makazze"],
+      "roster_verified": true
+    },
+    "FURIA": {
+      "entry_method": "direct invite",
+      "players": ["FalleN", "yuurih", "YEKINDAR", "KSCERATO", "molodoy"],
+      "roster_verified": true
+    },
+    "Aurora": {
+      "entry_method": "European qualifier",
+      "players": ["XANTARES", "woxic", "Jimpphat", "kyxsan", "Wicadia"],
+      "roster_verified": true
+    },
+    "magic": {
+      "entry_method": "European qualifier",
+      "players": ["MaSvAl", "sFade8", "AW", "mo0N", "tenzy"],
+      "roster_verified": true
+    },
+    "MIBR": {
+      "entry_method": "South American qualifier",
+      "players": ["LNZ", "nqz", "insani", "venomzera", "tomaszin"],
+      "roster_verified": true
+    },
+    "NRG": {
+      "entry_method": "North American qualifier",
+      "players": ["nitr0", "Sonic", "hallzerk", "Grim", "jeorgesnorts"],
+      "roster_verified": true
+    }
+  }
+}
